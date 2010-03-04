@@ -1,0 +1,15 @@
+
+*******************************************************************************
+
+Next:
+
+1. To run the generated tests, you'll need shoulda, factory_girl, and webrat.
+   Update your config/environments/test.rb:
+
+     config.gem "shoulda"
+     config.gem "factory_girl"
+     config.gem "webrat"
+  
+  Unless they are already included.
+
+*******************************************************************************

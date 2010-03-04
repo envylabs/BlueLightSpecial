@@ -13,6 +13,8 @@ class BlueLightSpecialTestsGenerator < Rails::Generator::Base
        "test/integration/password_reset_test.rb"].each do |file|
         m.file file, file
        end
+      
+      m.readme "README"
     end
   end
 
