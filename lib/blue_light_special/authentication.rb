@@ -133,9 +133,7 @@ module BlueLightSpecial
       
       ##
       # Sets up the facebook session if the logged-in user is from facebook
-      #--
-      # FIXME: Use i18n interface for flash.
-      #++
+      #
       def find_facebook_session
         set_facebook_session
         if facebook_session
@@ -147,7 +145,9 @@ module BlueLightSpecial
           facebook_sign_out
         end
       rescue Facebooker::Session::SessionExpired
-        flash.now[:error] = "You have logged out of Facebook"
+        flash.now[:error] = translate(:facebook_log_out,
+          :scope   => [:blue_light_special, :authentication],
+          :default => "You have logged out of Facebook")
         facebook_sign_out
       rescue NoMethodError
         facebook_sign_out
