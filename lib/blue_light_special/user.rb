@@ -123,7 +123,11 @@ module BlueLightSpecial
         end
         save
       end
-
+      
+      def facebook_user?
+        !self.facebook_uid.blank?
+      end
+      
       protected
 
       def generate_hash(string)
