@@ -19,3 +19,5 @@ rdoc
 pkg
 
 ## PROJECT::SPECIFIC
+test/rails_root/*
+!test/rails_root/vendor/gems/justinfrench-formtastic-0.2.1
