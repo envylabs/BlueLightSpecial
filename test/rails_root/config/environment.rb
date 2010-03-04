@@ -12,6 +12,12 @@ Rails::Initializer.run do |config|
   config.gem "justinfrench-formtastic", 
     :lib     => 'formtastic', 
     :source  => 'http://gems.github.com'
+  
+  config.gem "facebooker", 
+    :version => '=1.0.62'
+  
+  config.gem "delayed_job", 
+    :version => '=1.8.4'
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end

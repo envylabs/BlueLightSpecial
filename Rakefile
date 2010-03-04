@@ -13,6 +13,7 @@ begin
     gem.authors = ["Nathaniel Bibler"]
     
     gem.add_dependency "facebooker", '=1.0.62'
+    gem.add_dependency "delayed_job", '=1.8.4'
     
     gem.add_development_dependency "shoulda", ">= 0"
   end
@@ -22,12 +23,13 @@ rescue LoadError
 end
 
 namespace :test do
-  Rake::TestTask.new(:basic => ["generator:cleanup",
+  Rake::TestTask.new(:basic => ["check_dependencies",
+                                "generator:cleanup",
                                 "generator:blue_light_special",
                                 "generator:blue_light_special_tests"]) do |task|
     task.libs << "lib"
     task.libs << "test"
-    task.pattern = "test/**/*_test.rb"
+    task.pattern = "test/{controllers,models}/*_test.rb"
     task.verbose = false
   end
 end
@@ -49,7 +51,7 @@ namespace :generator do
   
   desc "Run the blue_light_special generator"
   task :blue_light_special do
-    system "cd test/rails_root && ./script/generate blue_light_special -f && rake db:migrate db:test:prepare"
+    system "cd test/rails_root && ./script/generate blue_light_special -f && rake gems:unpack && rake db:migrate db:test:prepare"
   end
 
   desc "Run the blue_light_special tests generator"
