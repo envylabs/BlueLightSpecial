@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rake/testtask'
 
 begin
   require 'jeweler'
@@ -17,11 +18,42 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+namespace :test do
+  Rake::TestTask.new(:basic => ["generator:cleanup",
+                                "generator:blue_light_special",
+                                "generator:blue_light_special_tests"]) do |task|
+    task.libs << "lib"
+    task.libs << "test"
+    task.pattern = "test/**/*_test.rb"
+    task.verbose = false
+  end
+end
+
+generators = %w(blue_light_special blue_light_special_tests)
+
+namespace :generator do
+  desc "Cleans up the test app before running the generator"
+  task :cleanup do
+    FileList["test/rails_root/db/**/*"].each do |each|
+      FileUtils.rm_rf(each)
+    end
+    
+    FileUtils.rm_rf("test/rails_root/vendor/plugins/blue_light_special")
+    FileUtils.mkdir_p("test/rails_root/vendor/plugins")
+    blue_light_special_root = File.expand_path(File.dirname(__FILE__))
+    system("ln -s \"#{blue_light_special_root}\" test/rails_root/vendor/plugins/blue_light_special")
+  end
+  
+  desc "Run the blue_light_special generator"
+  task :blue_light_special do
+    system "cd test/rails_root && ./script/generate blue_light_special -f && rake db:migrate db:test:prepare"
+  end
+
+  desc "Run the blue_light_special tests generator"
+  task :blue_light_special_tests do
+    system "cd test/rails_root && ./script/generate blue_light_special_tests -f"
+  end
+  
 end
 
 begin
@@ -37,16 +69,14 @@ rescue LoadError
   end
 end
 
-task :test => :check_dependencies
-
-task :default => :test
+task :default => ['test:basic']
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "blue_light_special #{version}"
+  rdoc.title    = "BlueLightSpecial #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
