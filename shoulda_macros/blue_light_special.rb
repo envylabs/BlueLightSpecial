@@ -74,7 +74,6 @@ module BlueLightSpecial
       context "A signed in user" do
         setup do
           @user = Factory(:user)
-          @user.confirm_email!
           sign_in_as @user
         end
         merge_block(&blk)

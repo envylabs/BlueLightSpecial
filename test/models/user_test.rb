@@ -77,30 +77,6 @@ class UserTest < ActiveSupport::TestCase
     should_validate_uniqueness_of :email
   end
 
-  # confirming email
-
-  context "A user without email confirmation" do
-    setup do
-      @user = Factory(:user)
-      assert ! @user.email_confirmed?
-    end
-
-    context "after #confirm_email!" do
-      setup do
-        assert @user.confirm_email!
-        @user.reload
-      end
-
-      should "have confirmed their email" do
-        assert @user.email_confirmed?
-      end
-
-      should "reset confirmation token" do
-        assert_nil @user.confirmation_token
-      end
-    end
-  end
-
   # authenticating
 
   context "A user" do
