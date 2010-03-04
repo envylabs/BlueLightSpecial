@@ -15,19 +15,6 @@ module BlueLightSpecial
       end
     end
 
-    def should_be_signed_in_and_email_confirmed_as(&block)
-      warn "[DEPRECATION] should_be_signed_in_and_email_confirmed_as: questionable usefulness"
-      should_be_signed_in_as &block
-
-      should "have confirmed email" do
-        user = block.bind(self).call
-
-        assert_not_nil user
-        assert_equal user, assigns(:user)
-        assert assigns(:user).email_confirmed?
-      end
-    end
-
     def should_not_be_signed_in
       warn "[DEPRECATION] should_not_be_signed_in is no longer a valid test since we now store a remember_token in cookies, not user_id in session"
       should "not be signed in" do
@@ -177,7 +164,7 @@ module BlueLightSpecial
       warn "[DEPRECATION] should_display_a_password_update_form: not meant to be public, no longer used internally"
       should "have a form for the user's token, password, and password confirm" do
         update_path = ERB::Util.h(
-          user_password_path(@user, :token => @user.confirmation_token)
+          user_password_path(@user, :token => @user.password_reset_token)
         )
 
         assert_select 'form[action=?]', update_path do
@@ -231,7 +218,7 @@ module BlueLightSpecial
       end
 
       def sign_in
-        sign_in_as Factory(:email_confirmed_user)
+        sign_in_as Factory(:user)
       end
 
       def sign_out

@@ -2,10 +2,11 @@ class BlueLightSpecialCreateUsers < ActiveRecord::Migration
   def self.up
     create_table(:users) do |t|
       t.string   :email
-      t.string   :encrypted_password, :limit => 128
-      t.string   :salt,               :limit => 128
-      t.string   :remember_token,     :limit => 128
-      t.string   :facebook_uid,       :limit => 50
+      t.string   :encrypted_password,   :limit => 128
+      t.string   :salt,                 :limit => 128
+      t.string   :remember_token,       :limit => 128
+      t.string   :facebook_uid,         :limit => 50
+      t.string   :password_reset_token, :limit => 128
       t.timestamps
     end
 

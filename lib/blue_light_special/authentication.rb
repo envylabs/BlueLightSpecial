@@ -150,7 +150,6 @@ module BlueLightSpecial
         flash.now[:error] = "You have logged out of Facebook"
         facebook_sign_out
       rescue NoMethodError
-        flash[:error] = "Unable to connect to Facebook"
         facebook_sign_out
         redirect_to sign_in_path
       end

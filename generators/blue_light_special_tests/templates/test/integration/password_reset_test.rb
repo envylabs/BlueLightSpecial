@@ -44,8 +44,8 @@ class PasswordResetTest < ActionController::IntegrationTest
         sent = ActionMailer::Base.deliveries.last
         assert_equal @user.email, sent.recipients
         assert_match /password/i, sent.subject
-        assert !@user.confirmation_token.blank?
-        assert_match /#{@user.confirmation_token}/, sent.body[:url]
+        assert !@user.password_reset_token.blank?
+        assert_match /#{@user.password_reset_token}/, sent.body[:url]
       end
       
     end
@@ -118,7 +118,7 @@ class PasswordResetTest < ActionController::IntegrationTest
     options[:confirm]   ||= options[:password]
     
     visit edit_user_password_path(:user_id => user,
-                                  :token   => user.confirmation_token)
+                                  :token   => user.password_reset_token)
     fill_in "New password",       :with => options[:password]
     fill_in "New password again", :with => options[:confirm]
     click_button "Reset!"

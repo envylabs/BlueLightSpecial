@@ -29,7 +29,7 @@ class UserTest < ActiveSupport::TestCase
     end
 
     should "initialize confirmation token" do
-      assert_not_nil Factory(:user).confirmation_token
+      assert_not_nil Factory(:user)
     end
 
     context "encrypt password" do
@@ -52,23 +52,6 @@ class UserTest < ActiveSupport::TestCase
     should "store email in exact case" do
       user = Factory(:user, :email => "John.Doe@example.com")
       assert_equal "John.Doe@example.com", user.email
-    end
-
-    should "send the confirmation email" do
-      assert_sent_email do |email|
-        email.subject =~ /account confirmation/i
-      end
-    end
-  end
-
-  context "When signing up with email already confirmed" do
-    setup do
-      ActionMailer::Base.deliveries.clear
-      Factory(:user, :email_confirmed => true)
-    end
-
-    should "not send the confirmation email" do
-      assert_did_not_send_email
     end
   end
 
@@ -100,7 +83,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "When resetting authentication with reset_remember_token!" do
     setup do
-      @user  = Factory(:email_confirmed_user)
+      @user  = Factory(:user)
       @user.remember_token = "old-token"
       @user.reset_remember_token!
     end
@@ -114,7 +97,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "An email confirmed user" do
     setup do
-      @user = Factory(:email_confirmed_user)
+      @user = Factory(:user)
       @old_encrypted_password = @user.encrypted_password
     end
 
@@ -133,10 +116,10 @@ class UserTest < ActiveSupport::TestCase
   should "not generate the same remember token for users with the same password at the same time" do
     Time.stubs(:now => Time.now)
     password    = 'secret'
-    first_user  = Factory(:email_confirmed_user,
+    first_user  = Factory(:user,
                           :password              => password,
                           :password_confirmation => password)
-    second_user = Factory(:email_confirmed_user,
+    second_user = Factory(:user,
                           :password              => password,
                           :password_confirmation => password)
 
@@ -147,19 +130,18 @@ class UserTest < ActiveSupport::TestCase
 
   context "An email confirmed user" do
     setup do
-      @user = Factory(:email_confirmed_user)
+      @user = Factory(:user)
       @old_encrypted_password = @user.encrypted_password
-      @user.confirm_email!
     end
 
     context "who requests password reminder" do
       setup do
-        assert_nil @user.confirmation_token
+        assert_nil @user.password_reset_token
         @user.forgot_password!
       end
 
-      should "generate confirmation token" do
-        assert_not_nil @user.confirmation_token
+      should "generate password reset token" do
+        assert_not_nil @user.password_reset_token
       end
 
       context "and then updates password" do
@@ -173,8 +155,8 @@ class UserTest < ActiveSupport::TestCase
                              @old_encrypted_password
           end
 
-          should "clear confirmation token" do
-            assert_nil @user.confirmation_token
+          should "clear password reset token" do
+            assert_nil @user.password_reset_token
           end
         end
 
@@ -188,8 +170,8 @@ class UserTest < ActiveSupport::TestCase
                          @old_encrypted_password
           end
 
-          should "not clear confirmation token" do
-            assert_not_nil @user.confirmation_token
+          should "not clear password reset token" do
+            assert_not_nil @user.password_reset_token
           end
         end
       end

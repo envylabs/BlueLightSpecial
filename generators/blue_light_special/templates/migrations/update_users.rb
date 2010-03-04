@@ -3,11 +3,12 @@ class BlueLightSpecialUpdateUsers<%= schema_version_constant %> < ActiveRecord::
 <%
       existing_columns = ActiveRecord::Base.connection.columns(:users).collect { |each| each.name }
       columns = [
-        [:email,              't.string :email'],
-        [:encrypted_password, 't.string :encrypted_password, :limit => 128'],
-        [:salt,               't.string :salt, :limit => 128'],
-        [:remember_token,     't.string :remember_token, :limit => 128'],
-        [:facebook_uid,       't.string :facebook_uid, :limit => 50']
+        [:email,                't.string :email'],
+        [:encrypted_password,   't.string :encrypted_password, :limit => 128'],
+        [:salt,                 't.string :salt, :limit => 128'],
+        [:remember_token,       't.string :remember_token, :limit => 128'],
+        [:facebook_uid,         't.string :facebook_uid, :limit => 50'],
+        [:password_reset_token, 't.string :password_reset_token, :limit => 128']
       ].delete_if {|c| existing_columns.include?(c.first.to_s)}
 -%>
     change_table(:users) do |t|

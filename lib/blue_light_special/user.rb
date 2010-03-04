@@ -105,6 +105,7 @@ module BlueLightSpecial
       # @example
       #   user.forgot_password!
       def forgot_password!
+        generate_password_reset_token
         save(false)
       end
 
@@ -117,6 +118,9 @@ module BlueLightSpecial
       def update_password(new_password, new_password_confirmation)
         self.password              = new_password
         self.password_confirmation = new_password_confirmation
+        if valid?
+          self.password_reset_token = nil
+        end
         save
       end
 
@@ -140,7 +144,11 @@ module BlueLightSpecial
       def encrypt(string)
         generate_hash("--#{salt}--#{string}--")
       end
-
+      
+      def generate_password_reset_token
+        self.password_reset_token = encrypt("--#{Time.now.utc}--#{password}--#{rand}--")
+      end
+      
       def generate_remember_token
         self.remember_token = encrypt("--#{Time.now.utc}--#{encrypted_password}--#{id}--#{rand}--")
       end
