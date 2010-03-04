@@ -22,6 +22,6 @@ class BlueLightSpecial::UsersController < ApplicationController
   private
 
   def url_after_create
-    sign_in_url
+    root_url
   end
 end

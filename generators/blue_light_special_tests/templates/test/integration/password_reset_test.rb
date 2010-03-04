@@ -110,7 +110,7 @@ class PasswordResetTest < ActionController::IntegrationTest
   def request_password_reset(email)
     visit new_password_url
     fill_in "Email Address", :with => email
-    click_button "Reset!"
+    click_button "reset password"
   end
   
   def change_password(user, options = {})
@@ -119,9 +119,9 @@ class PasswordResetTest < ActionController::IntegrationTest
     
     visit edit_user_password_path(:user_id => user,
                                   :token   => user.password_reset_token)
-    fill_in "New password",       :with => options[:password]
-    fill_in "New password again", :with => options[:confirm]
-    click_button "Reset!"
+    fill_in "Choose password",    :with => options[:password]
+    fill_in "Confirm password",   :with => options[:confirm]
+    click_button "save this password"
   end
   
 end
