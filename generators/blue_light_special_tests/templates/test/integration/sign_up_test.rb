@@ -24,27 +24,23 @@ class SignUpTest < ActionController::IntegrationTest
     
     context 'with valid data' do
       
-      stubbing_any_authorize_net_customer_profile_request do
-      
-        should 'sign in the user' do
-          sign_up(:email => 'bob@bob.bob', :password => 'password', :password_confirmation => 'password')
-          assert controller.signed_in?
-        end
-      
-        should 'see "Thanks for signing up with Twongo!"' do
-          sign_up(:email => 'bob@bob.bob', :password => 'password', :password_confirmation => 'password')
-          assert_match /Thanks for signing up with Twongo!/, response.body
-        end
-      
-        should 'send a welcome email' do
-          sign_up(:email => 'bob@bob.bob', :password => 'password', :password_confirmation => 'password')
-          user = User.find_by_email('bob@bob.bob')
-          Delayed::Job.work_off
-          sent = ActionMailer::Base.deliveries.last
-          assert_equal user.email, sent.recipients
-          assert_match /welcome/i, sent.subject
-        end
-        
+      should 'sign in the user' do
+        sign_up(:email => 'bob@bob.bob', :password => 'password', :password_confirmation => 'password')
+        assert controller.signed_in?
+      end
+    
+      should 'see "Thanks for signing up with Twongo!"' do
+        sign_up(:email => 'bob@bob.bob', :password => 'password', :password_confirmation => 'password')
+        assert_match /Thanks for signing up with Twongo!/, response.body
+      end
+    
+      should 'send a welcome email' do
+        sign_up(:email => 'bob@bob.bob', :password => 'password', :password_confirmation => 'password')
+        user = User.find_by_email('bob@bob.bob')
+        Delayed::Job.work_off
+        sent = ActionMailer::Base.deliveries.last
+        assert_equal user.email, sent.recipients
+        assert_match /welcome/i, sent.subject
       end
       
     end

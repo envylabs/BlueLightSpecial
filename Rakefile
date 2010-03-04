@@ -11,6 +11,9 @@ begin
     gem.email = "nate@envylabs.com"
     gem.homepage = "http://github.com/envylabs/blue_light_special"
     gem.authors = ["Nathaniel Bibler"]
+    
+    gem.add_dependency "facebooker", '=1.0.62'
+    
     gem.add_development_dependency "shoulda", ">= 0"
   end
   Jeweler::GemcutterTasks.new

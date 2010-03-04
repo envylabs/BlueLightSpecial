@@ -8,12 +8,12 @@ module BlueLightSpecial
 
     module ClassMethods
       def self.extended(controller)
-        controller.helper_method :current_user, :signed_in?, :signed_out?
+        controller.helper_method :current_user, :signed_in?, :signed_out?, :facebook_session, :impersonating?
         controller.hide_action   :current_user, :current_user=,
                                  :signed_in?,   :signed_out?,
                                  :sign_in,      :sign_out,
                                  :authenticate, :deny_access
-
+        controller.before_filter :find_facebook_session
       end
     end
 
@@ -89,6 +89,7 @@ module BlueLightSpecial
         flash[:failure] = flash_message if flash_message
         redirect_to(sign_in_url)
       end
+      
 
       protected
 
@@ -124,6 +125,43 @@ module BlueLightSpecial
 
       def redirect_to_root
         redirect_to('/')
+      end
+      
+      def impersonating?
+        !session[:admin_user_id].blank?
+      end
+      
+      ##
+      # Sets up the facebook session if the logged-in user is from facebook
+      #--
+      # FIXME: Use i18n interface for flash.
+      #++
+      def find_facebook_session
+        set_facebook_session
+        if facebook_session
+          unless signed_in?
+            facebook_session.user.populate
+            sign_in(User.find_facebook_user(facebook_session.user))
+          end
+        elsif signed_in? && current_user.facebook_user? && !impersonating?
+          facebook_sign_out
+        end
+      rescue Facebooker::Session::SessionExpired
+        flash.now[:error] = "You have logged out of Facebook"
+        facebook_sign_out
+      rescue NoMethodError
+        flash[:error] = "Unable to connect to Facebook"
+        facebook_sign_out
+        redirect_to sign_in_path
+      end
+
+      ##
+      # Sign the user out and clear the Facebook session info
+      #
+      def facebook_sign_out
+        clear_fb_cookies!
+        clear_facebook_session_information
+        sign_out
       end
     end
 

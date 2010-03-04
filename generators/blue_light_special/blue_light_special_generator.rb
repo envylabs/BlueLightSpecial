@@ -7,10 +7,10 @@ class BlueLightSpecialGenerator < Rails::Generator::Base
     record do |m|
       m.directory File.join("config", "initializers")
       m.file "blue_light_special.rb", "config/initializers/blue_light_special.rb"
-
+      
       m.insert_into "app/controllers/application_controller.rb",
                     "include BlueLightSpecial::Authentication"
-
+      
       user_model = "app/models/user.rb"
       if File.exists?(user_model)
         m.insert_into user_model, "include BlueLightSpecial::User"
@@ -18,7 +18,7 @@ class BlueLightSpecialGenerator < Rails::Generator::Base
         m.directory File.join("app", "models")
         m.file "user.rb", user_model
       end
-
+      
       m.insert_into "config/routes.rb",
                     "BlueLightSpecial::Routes.draw(map)"
 
