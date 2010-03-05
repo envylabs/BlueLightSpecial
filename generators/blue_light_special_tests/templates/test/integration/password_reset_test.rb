@@ -42,7 +42,7 @@ class PasswordResetTest < ActionController::IntegrationTest
         @user.reload # catch updated confirmation token
         Delayed::Job.work_off
         assert !@user.password_reset_token.blank?
-        assert_email_sent do |email|
+        assert_sent_email do |email|
           email.recipients =~ /#{Regexp.escape @user.email}/i &&
           email.subject =~ /password/i &&
           email.body[:url] =~ /#{Regexp.escape @user.password_reset_token}/

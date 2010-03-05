@@ -8,7 +8,9 @@ module BlueLightSpecial
 
     module ClassMethods
       def self.extended(controller)
-        controller.helper_method :current_user, :signed_in?, :signed_out?, :facebook_session, :impersonating?
+        controller.helper_method :current_user, :signed_in?, 
+                                 :signed_out?,  :facebook_session,
+                                 :impersonating?
         controller.hide_action   :current_user, :current_user=,
                                  :signed_in?,   :signed_out?,
                                  :sign_in,      :sign_out,

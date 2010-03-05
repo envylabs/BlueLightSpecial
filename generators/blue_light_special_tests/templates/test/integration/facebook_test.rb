@@ -3,7 +3,7 @@ require 'facebooker/mock/service'
 require 'facebooker/mock/session'
 
 class FacebookTest < ActionController::IntegrationTest
-
+  
   context 'Signing in with Facebook' do
     
     setup do
@@ -16,11 +16,7 @@ class FacebookTest < ActionController::IntegrationTest
     should 'find an existing user with the facebook uid' do
       user = Factory( :facebook_user,
                       :facebook_uid => 8055,
-                      :email => 'bob@facebook.com',
-                      :first_name => 'Bob',
-                      :last_name => 'Jones',
-                      :display_name => 'Bob Jones',
-                      :zip_code => '11111')
+                      :email => 'bob@facebook.com')
 
       visit new_password_url
       assert controller.signed_in?
