@@ -9,15 +9,15 @@ Next:
 
      config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+3. If you haven't already, be sure you have delayed_jobs and facebooker setup 
+   and configured:
+
+     ./script/generate delayed_job
+     ./script/generate facebook
+
 2. Migrate:
 
      rake db:migrate
-
-3. If you haven't already, be sure you have delayed_jobs and facebooker setup 
-   and configured:
-   
-     ./script/generate delayed_job
-     ./script/generate facebook
 
 4. Make sure you're displaying flashes somewhere. For instance, in a layout:
 
