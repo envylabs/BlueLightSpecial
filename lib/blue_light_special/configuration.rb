@@ -5,7 +5,7 @@ module BlueLightSpecial
 
     def initialize
       @mailer_sender      = 'donotreply@example.com'
-      @impersonation_hash = ActionController::Base.session[:secret] || 'e76e05e1ddf74560ffb64c02a1c1b26c'
+      @impersonation_hash = 'e76e05e1ddf74560ffb64c02a1c1b26c'
     end
   end
 
