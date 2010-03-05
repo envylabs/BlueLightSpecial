@@ -5,12 +5,13 @@ require 'rake/testtask'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "blue_light_special"
-    gem.summary = %Q{Rails authentication by email and password}
+    gem.name        = "blue_light_special"
+    gem.summary     = %Q{Rails authentication by email and password}
     gem.description = %Q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
-    gem.email = "nate@envylabs.com"
-    gem.homepage = "http://github.com/envylabs/blue_light_special"
-    gem.authors = ["Nathaniel Bibler"]
+    gem.email       = "nate@envylabs.com"
+    gem.homepage    = "http://github.com/envylabs/blue_light_special"
+    gem.authors     = ["Nathaniel Bibler"]
+    gem.files       = FileList["[A-Z]*", "{app,config,generators,lib,shoulda_macros,rails}/**/*"]
     
     gem.add_dependency "facebooker", '=1.0.62'
     gem.add_dependency "delayed_job", '=1.8.4'
