@@ -142,7 +142,7 @@ module BlueLightSpecial
         if facebook_session
           unless signed_in?
             facebook_session.user.populate
-            sign_in(User.find_facebook_user(facebook_session.user))
+            sign_in(::User.find_facebook_user(facebook_session.user))
           end
         elsif signed_in? && current_user.facebook_user? && !impersonating?
           facebook_sign_out
@@ -152,9 +152,9 @@ module BlueLightSpecial
           :scope   => [:blue_light_special, :authentication],
           :default => "You have logged out of Facebook")
         facebook_sign_out
-      rescue NoMethodError
-        facebook_sign_out
-        redirect_to sign_in_path
+      # rescue NoMethodError
+      #   facebook_sign_out
+      #   redirect_to sign_in_path
       end
 
       ##

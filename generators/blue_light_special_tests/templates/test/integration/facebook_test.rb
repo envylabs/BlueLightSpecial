@@ -28,16 +28,13 @@ class FacebookTest < ActionController::IntegrationTest
     
       visit new_password_url
       assert controller.signed_in?
-      assert_equal controller.current_user.facebook_uid, 8055
+      assert_equal 8055, controller.current_user.facebook_uid
     end
   
     should 'copy the facebook user details' do
       visit new_password_url
       assert controller.signed_in?
-      assert_equal controller.current_user.first_name, 'Dave'
-      assert_equal controller.current_user.last_name, 'Fetterman'
-      assert_equal controller.current_user.display_name, 'Dave Fetterman'
-      assert_equal controller.current_user.email, 'bob@facebook.com'
+      assert_equal 'bob@facebook.com', controller.current_user.email
     end
   
   end

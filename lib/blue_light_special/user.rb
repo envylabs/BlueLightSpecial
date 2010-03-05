@@ -204,6 +204,15 @@ module BlueLightSpecial
         return nil  unless user = find_by_email(email)
         return user if     user.authenticated?(password)
       end
+      
+      def find_facebook_user(facebook_user)
+        user = ::User.find_by_facebook_uid(facebook_user.uid) || ::User.new
+        user.tap do |user|
+          user.facebook_uid     = facebook_user.uid
+          user.email            = facebook_user.email
+          user.save
+        end
+      end
     end
 
   end
