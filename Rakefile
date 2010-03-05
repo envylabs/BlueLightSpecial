@@ -52,7 +52,7 @@ namespace :generator do
   
   desc "Run the blue_light_special generator"
   task :blue_light_special do
-    system "cd test/rails_root && ./script/generate blue_light_special -f && rake gems:unpack && rake db:migrate db:test:prepare"
+    system "cd test/rails_root && ./script/generate blue_light_special -f && ./script/generate delayed_job && ./script/generate facebook && rake gems:unpack && rake db:migrate db:test:prepare"
   end
 
   desc "Run the blue_light_special tests generator"
