@@ -23,10 +23,11 @@ module BlueLightSpecial
         :controller => 'blue_light_special/sessions',
         :only       => [:new, :create, :destroy]
 
-      map.resources :users, :controller => 'blue_light_special/users'
+      map.resources :users, :controller => 'blue_light_special/users' do |users|
         users.resource :password,
           :controller => 'blue_light_special/passwords',
           :only       => [:create, :edit, :update]
+      end
       
       map.resources :impersonation,
         :controller => 'blue_light_special/impersonations',
