@@ -14,6 +14,7 @@ begin
     
     gem.add_dependency "facebooker", '=1.0.62'
     gem.add_dependency "delayed_job", '=1.8.4'
+    gem.add_dependency "mad_mimi_mailer", '=0.0.7'
     
     gem.add_development_dependency "shoulda", ">= 0"
   end
