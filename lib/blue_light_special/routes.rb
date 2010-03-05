@@ -29,7 +29,7 @@ module BlueLightSpecial
           :only       => [:create, :edit, :update]
       end
       
-      map.resources :impersonation,
+      map.resource  :impersonation,
         :controller => 'blue_light_special/impersonations',
         :only       => [:create, :destroy]
       
