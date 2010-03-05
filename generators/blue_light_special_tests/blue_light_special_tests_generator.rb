@@ -7,6 +7,7 @@ class BlueLightSpecialTestsGenerator < Rails::Generator::Base
       m.directory File.join("test", "integration")
 
       ["test/integration/facebook_test.rb",
+       "test/integration/impersonation_test.rb",
        "test/integration/sign_in_test.rb",
        "test/integration/sign_out_test.rb",
        "test/integration/sign_up_test.rb",
