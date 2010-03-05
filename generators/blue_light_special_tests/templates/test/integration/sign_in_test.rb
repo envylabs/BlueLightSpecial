@@ -41,12 +41,6 @@ class SignInTest < ActionController::IntegrationTest
         assert controller.signed_in?
       end
       
-      should 'redirect back to tender' do
-        sign_in_as 'bob@bob.bob', 'password', sign_in_url(:to => 'http://help.twongo.com')
-        assert_response :redirect
-        assert_match(%r{\Ahttp://help.twongo.com/\?sso=}, response['Location'])
-      end
-      
     end
         
     context 'when confirmed but with bad credentials' do

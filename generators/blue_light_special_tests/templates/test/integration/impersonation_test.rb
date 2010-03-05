@@ -5,8 +5,8 @@ class ImpersonationTest < ActionController::IntegrationTest
   context 'When impersonating another user' do
     
     setup do
-      @bob = Factory(:user, :email => 'bob@bob.bob', :display_name => 'Bobby')
-      @admin_user = Factory(:admin_user, :email => 'admin@twongo.com')
+      @bob = Factory(:user, :email => 'bob@bob.bob')
+      @admin_user = Factory(:admin_user, :email => 'admin@example.com')
       sign_in_as @admin_user.email, @admin_user.password
       impersonate(@bob)
     end
@@ -20,7 +20,7 @@ class ImpersonationTest < ActionController::IntegrationTest
     end
     
     should 'be able to go back to the original admin user' do
-      delete impersonate_url
+      delete impersonation_url
       assert controller.signed_in?
       assert_equal controller.current_user, @admin_user
     end
@@ -32,7 +32,7 @@ class ImpersonationTest < ActionController::IntegrationTest
   
   
   def impersonate(user)
-    post impersonate_url(user)
+    post impersonation_url(user)
   end
   
 end

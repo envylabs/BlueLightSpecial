@@ -7,7 +7,7 @@ class BlueLightSpecial::ImpersonationsController < ApplicationController
     user = User.find(params[:user_id])
     if user == current_user
       flash[:error] = "Cannot impersonate yourself"
-      redirect_to admin_user_url(user)
+      redirect_to root_url
     else
       session[:admin_user_id]       = current_user.id
       session[:impersonation_hash]  = Impersonation.hash_for(current_user.id)
@@ -23,7 +23,7 @@ class BlueLightSpecial::ImpersonationsController < ApplicationController
       session[:admin_user_id]       = nil
       session[:impersonation_hash]  = nil
       sign_in(admin_user)
-      redirect_to admin_user_url(old_user)
+      redirect_to root_url(old_user)
     else
       deny_access
     end
