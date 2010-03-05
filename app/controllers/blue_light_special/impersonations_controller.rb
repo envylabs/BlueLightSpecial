@@ -1,6 +1,6 @@
 class BlueLightSpecial::ImpersonationsController < ApplicationController
   before_filter :authenticate
-  before_filter :check_role
+  before_filter :check_role, :except => :destroy
   
   
   def create
@@ -18,12 +18,12 @@ class BlueLightSpecial::ImpersonationsController < ApplicationController
   
   def destroy
     if Impersonation.valid_hash?(session[:admin_user_id], session[:impersonation_hash])
-      old_user = current_user
-      admin_user = User.find(session[:admin_user_id])
+      old_user    = current_user
+      admin_user  = User.find(session[:admin_user_id])
       session[:admin_user_id]       = nil
       session[:impersonation_hash]  = nil
       sign_in(admin_user)
-      redirect_to root_url(old_user)
+      redirect_to root_url
     else
       deny_access
     end

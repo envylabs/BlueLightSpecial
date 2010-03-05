@@ -14,7 +14,8 @@ module BlueLightSpecial
         controller.hide_action   :current_user, :current_user=,
                                  :signed_in?,   :signed_out?,
                                  :sign_in,      :sign_out,
-                                 :authenticate, :deny_access
+                                 :authenticate, :deny_access,
+                                 :impersonating?
         controller.before_filter :find_facebook_session
       end
     end
@@ -92,6 +93,10 @@ module BlueLightSpecial
         redirect_to(sign_in_url)
       end
       
+      def impersonating?
+        !session[:admin_user_id].blank?
+      end
+      
 
       protected
 
@@ -127,10 +132,6 @@ module BlueLightSpecial
 
       def redirect_to_root
         redirect_to('/')
-      end
-      
-      def impersonating?
-        !session[:admin_user_id].blank?
       end
       
       ##

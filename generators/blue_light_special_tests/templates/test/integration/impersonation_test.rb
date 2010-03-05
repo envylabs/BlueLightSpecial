@@ -32,7 +32,7 @@ class ImpersonationTest < ActionController::IntegrationTest
   
   
   def impersonate(user)
-    post impersonation_url(user)
+    post impersonation_url(:user_id => user)
   end
   
 end
