@@ -4,6 +4,7 @@ class BlueLightSpecialUpdateUsers<%= schema_version_constant %> < ActiveRecord::
       existing_columns = ActiveRecord::Base.connection.columns(:users).collect { |each| each.name }
       columns = [
         [:email,                't.string :email'],
+        [:role,                 't.string :role, :limit => 50'],
         [:encrypted_password,   't.string :encrypted_password, :limit => 128'],
         [:salt,                 't.string :salt, :limit => 128'],
         [:remember_token,       't.string :remember_token, :limit => 128'],

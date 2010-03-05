@@ -1,9 +1,11 @@
 module BlueLightSpecial
   class Configuration
     attr_accessor :mailer_sender
+    attr_accessor :impersonation_hash
 
     def initialize
-      @mailer_sender = 'donotreply@example.com'
+      @mailer_sender      = 'donotreply@example.com'
+      @impersonation_hash = ActionController::Base.session[:secret] || 'e76e05e1ddf74560ffb64c02a1c1b26c'
     end
   end
 
@@ -17,6 +19,7 @@ module BlueLightSpecial
   # @example
   #   BlueLightSpecial.configure do |config|
   #     config.mailer_sender = 'donotreply@example.com'
+  #     config.impersonation_hash = 'abc123def456...'
   #   end
   def self.configure
     self.configuration ||= Configuration.new

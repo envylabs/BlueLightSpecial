@@ -163,6 +163,6 @@ module BlueLightSpecial
         sign_out
       end
     end
-
+    
   end
 end
