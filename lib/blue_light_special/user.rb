@@ -2,7 +2,9 @@ require 'digest/sha1'
 
 module BlueLightSpecial
   module User
-
+    
+    Admin = 'admin'
+    
     # Hook for all BlueLightSpecial::User modules.
     #
     # If you need to override parts of BlueLightSpecial::User,
@@ -68,6 +70,7 @@ module BlueLightSpecial
           before_save   :initialize_salt,
                         :encrypt_password
           before_create :generate_remember_token
+          after_create  :send_welcome_email
         end
       end
     end
@@ -128,6 +131,13 @@ module BlueLightSpecial
         !self.facebook_uid.blank?
       end
       
+      ##
+      # Returns +true+ if the user is an admin.
+      # 
+      def admin?
+        self.role == Admin
+      end
+      
       protected
 
       def generate_hash(string)
@@ -176,6 +186,11 @@ module BlueLightSpecial
         # warn "[DEPRECATION] password_required?: use !password_optional? instead"
         !password_optional?
       end
+      
+      def send_welcome_email
+        Delayed::Job.enqueue DeliverWelcomeJob.new(self.id)
+      end
+      
     end
 
     module ClassMethods
