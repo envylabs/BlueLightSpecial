@@ -41,11 +41,12 @@ class PasswordResetTest < ActionController::IntegrationTest
         request_password_reset(@user.email)
         @user.reload # catch updated confirmation token
         Delayed::Job.work_off
-        sent = ActionMailer::Base.deliveries.last
-        assert_equal @user.email, sent.recipients
-        assert_match /password/i, sent.subject
         assert !@user.password_reset_token.blank?
-        assert_match /#{@user.password_reset_token}/, sent.body[:url]
+        assert_email_sent do |email|
+          email.recipients =~ /#{Regexp.escape @user.email}/i &&
+          email.subject =~ /password/i &&
+          email.body[:url] =~ /#{Regexp.escape @user.password_reset_token}/
+        end
       end
       
     end

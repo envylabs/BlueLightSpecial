@@ -10,7 +10,7 @@ class FacebookTest < ActionController::IntegrationTest
       Facebooker::MockService.fixture_path = File.dirname(__FILE__) + '/../facebooker_fixtures'
       fb_session = Facebooker::MockSession.create
       fb_session.secure!
-      CitiesController.any_instance.stubs(:facebook_session).returns(fb_session)
+      BlueLightSpecial::PasswordsController.any_instance.stubs(:facebook_session).returns(fb_session)
     end
     
     should 'find an existing user with the facebook uid' do
@@ -22,7 +22,7 @@ class FacebookTest < ActionController::IntegrationTest
                       :display_name => 'Bob Jones',
                       :zip_code => '11111')
 
-      visit city_url(City.default)
+      visit new_password_url
       assert controller.signed_in?
       assert_equal controller.current_user, user
     end
@@ -30,13 +30,13 @@ class FacebookTest < ActionController::IntegrationTest
     should 'create a new user when the facebook uid is not found' do
       assert_nil User.find_by_facebook_uid(8055)
     
-      visit city_url(City.default)
+      visit new_password_url
       assert controller.signed_in?
       assert_equal controller.current_user.facebook_uid, 8055
     end
   
     should 'copy the facebook user details' do
-      visit city_url(City.default)
+      visit new_password_url
       assert controller.signed_in?
       assert_equal controller.current_user.first_name, 'Dave'
       assert_equal controller.current_user.last_name, 'Fetterman'
