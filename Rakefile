@@ -28,7 +28,8 @@ namespace :test do
   Rake::TestTask.new(:basic => ["check_dependencies",
                                 "generator:cleanup",
                                 "generator:blue_light_special",
-                                "generator:blue_light_special_tests"]) do |task|
+                                "generator:blue_light_special_tests",
+                                "generator:blue_light_special_admin"]) do |task|
     task.libs << "lib"
     task.libs << "test"
     task.pattern = "test/{controllers,models}/*_test.rb"
@@ -59,6 +60,11 @@ namespace :generator do
   desc "Run the blue_light_special tests generator"
   task :blue_light_special_tests do
     system "cd test/rails_root && ./script/generate blue_light_special_tests -f"
+  end
+
+  desc "Run the blue_light_special admin generator"
+  task :blue_light_special_admin do
+    system "cd test/rails_root && ./script/generate blue_light_special_admin -f"
   end
   
 end

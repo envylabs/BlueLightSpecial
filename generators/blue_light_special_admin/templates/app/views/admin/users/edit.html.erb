@@ -1,0 +1,6 @@
+<h2>Edit User</h2>
+
+<% form_for @user, :url => admin_user_path(@user) do |form| %>
+  <%= render :partial => '/admin/users/form', :object => form %>
+  <%= form.submit 'Save', :disable_with => 'Please wait...' %>
+<% end %>

@@ -1,0 +1,7 @@
+<ul>
+  <%- @users.each do |user| -%>
+    <li><%= link_to user.name, admin_user_path(user) %> <%=h user.email %></li>
+  <%- end -%>
+</ul>
+
+<%= link_to 'New User', new_admin_user_path %>
