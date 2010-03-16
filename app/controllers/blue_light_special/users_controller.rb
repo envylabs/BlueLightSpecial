@@ -5,6 +5,11 @@ class BlueLightSpecial::UsersController < ApplicationController
   before_filter :redirect_to_root,  :only => [:new, :create], :if => :signed_in?
   filter_parameter_logging :password
 
+  def show
+    @user = current_user
+    render :template => 'users/show'
+  end
+
   def new
     @user = ::User.new(params[:user])
     render :template => 'users/new'
@@ -17,6 +22,21 @@ class BlueLightSpecial::UsersController < ApplicationController
       redirect_to(url_after_create)
     else
       render :template => 'users/new'
+    end
+  end
+  
+  def edit
+    @user = current_user
+    render :template => 'users/edit'
+  end
+  
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:success] = 'Your profile has been updated.'
+      redirect_to user_path(@user)
+    else
+      render :template => 'users/edit'
     end
   end
 

@@ -15,8 +15,10 @@ class SignUpTest < ActionController::IntegrationTest
     context 'with invalid data' do
       
       should 'show error messages' do
-        sign_up(:email => 'invalidemail', :password_confirmation => '')
+        sign_up(:email => 'invalidemail', :password_confirmation => '', :first_name => '', :last_name => '')
         assert_match /Email is invalid/, response.body
+        assert_match /First name.*blank/, response.body
+        assert_match /Last name.*blank/, response.body
         assert_match /Password doesn't match confirmation/, response.body
       end
       
