@@ -3,7 +3,9 @@ class BlueLightSpecialUpdateUsers<%= schema_version_constant %> < ActiveRecord::
 <%
       existing_columns = ActiveRecord::Base.connection.columns(:users).collect { |each| each.name }
       columns = [
-        [:email,                't.string :email'],
+        [:email,                't.string :email, :limit => 100'],
+        [:first_name,           't.string :first_name, :limit => 50'],
+        [:last_name,            't.string :last_name, :limit => 50'],
         [:role,                 't.string :role, :limit => 50'],
         [:encrypted_password,   't.string :encrypted_password, :limit => 128'],
         [:salt,                 't.string :salt, :limit => 128'],
@@ -23,7 +25,8 @@ class BlueLightSpecialUpdateUsers<%= schema_version_constant %> < ActiveRecord::
     index_names = existing_indexes.collect { |each| each.name }
     new_indexes = [
       [:index_users_on_email,                     'add_index :users, :email'],
-      [:index_users_on_remember_token,            'add_index :users, :remember_token']
+      [:index_users_on_remember_token,            'add_index :users, :remember_token'],
+      [:index_users_on_facebook_uid,              'add_index :users, :facebook_uid']
     ].delete_if { |each| index_names.include?(each.first.to_s) }
 -%>
 <% new_indexes.each do |each| -%>

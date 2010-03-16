@@ -57,6 +57,8 @@ module BlueLightSpecial
 
           validates_presence_of     :password, :unless => :password_optional?
           validates_confirmation_of :password, :unless => :password_optional?
+          
+          validates_presence_of     :first_name, :last_name
         end
       end
     end
@@ -136,6 +138,13 @@ module BlueLightSpecial
       # 
       def admin?
         self.role == Admin
+      end
+      
+      ##
+      # Returns the user's full name.
+      #
+      def name
+        "#{self.first_name} #{self.last_name}"
       end
       
       protected
@@ -221,6 +230,8 @@ module BlueLightSpecial
         user.tap do |user|
           user.facebook_uid     = facebook_uid
           user.email            = facebook_user['email']
+          user.first_name       = facebook_user['first_name']
+          user.last_name        = facebook_user['last_name']
           user.save
         end
       end

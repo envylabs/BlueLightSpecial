@@ -39,8 +39,10 @@ Next:
 
        def sign_up(options = {})
          visit new_user_url
-         fill_in "email",    :with => options[:email]                  || 'bob@bob.bob'
-         fill_in "password", :with => options[:password]               || 'password'
+         fill_in "email",            :with => options[:email]                  || 'bob@bob.bob'
+         fill_in "first name",       :with => options[:first_name]             || 'Bob'
+         fill_in "last name",        :with => options[:last_name]              || 'Bob'
+         fill_in "password",         :with => options[:password]               || 'password'
          fill_in "confirm password", :with => options[:password_confirmation]  || options[:password] || 'password'
          click_button 'sign up'
        end
