@@ -7,6 +7,9 @@ class BlueLightSpecialGenerator < Rails::Generator::Base
     record do |m|
       m.directory File.join("config", "initializers")
       m.file "blue_light_special.rb", "config/initializers/blue_light_special.rb"
+
+      m.file "xd_receiver.html", "public/xd_receiver.html"
+      m.file "xd_receiver_ssl.html", "public/xd_receiver_ssl.html"
       
       m.insert_into "app/controllers/application_controller.rb",
                     "include BlueLightSpecial::Authentication"

@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Nathaniel Bibler"]
-  s.date = %q{2010-03-05}
+  s.authors = ["Nathaniel Bibler", "Mark Kendall"]
+  s.date = %q{2010-03-16}
   s.description = %q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
   s.email = %q{nate@envylabs.com}
   s.extra_rdoc_files = [
@@ -48,7 +48,6 @@ Gem::Specification.new do |s|
      "generators/blue_light_special_tests/USAGE",
      "generators/blue_light_special_tests/blue_light_special_tests_generator.rb",
      "generators/blue_light_special_tests/templates/README",
-     "generators/blue_light_special_tests/templates/test/facebooker_fixtures/facebook.users.getInfo/609e98c680f254540205acf931ae2963.xml",
      "generators/blue_light_special_tests/templates/test/integration/facebook_test.rb",
      "generators/blue_light_special_tests/templates/test/integration/impersonation_test.rb",
      "generators/blue_light_special_tests/templates/test/integration/password_reset_test.rb",
@@ -94,8 +93,8 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/requires.rb",
      "test/rails_root/config/initializers/time_formats.rb",
      "test/rails_root/config/routes.rb",
-     "test/rails_root/db/migrate/20100305173127_blue_light_special_create_users.rb",
-     "test/rails_root/db/migrate/20100305173129_create_delayed_jobs.rb",
+     "test/rails_root/db/migrate/20100316162217_blue_light_special_create_users.rb",
+     "test/rails_root/db/migrate/20100316162218_create_delayed_jobs.rb",
      "test/rails_root/public/dispatch.rb",
      "test/rails_root/script/create_project.rb",
      "test/rails_root/test/factories/user.rb",
@@ -106,6 +105,30 @@ Gem::Specification.new do |s|
      "test/rails_root/test/integration/sign_in_test.rb",
      "test/rails_root/test/integration/sign_out_test.rb",
      "test/rails_root/test/integration/sign_up_test.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/generators/delayed_job/delayed_job_generator.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/generators/delayed_job/templates/migration.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/init.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/command.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/job.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/message_sending.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/performable_method.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/recipes.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/tasks.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/worker.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed_job.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/recipes/delayed_job.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/database.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/delayed_method_spec.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/job_spec.rb",
+     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/story_spec.rb",
+     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/generators/formtastic_stylesheets/formtastic_stylesheets_generator.rb",
+     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/lib/formtastic.rb",
+     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/lib/justin_french/formtastic.rb",
+     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/rails/init.rb",
+     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/spec/formtastic_spec.rb",
+     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/spec/test_helper.rb",
+     "test/rails_root/vendor/gems/mini_fb-0.2.2/lib/mini_fb.rb",
+     "test/rails_root/vendor/gems/mini_fb-0.2.2/test/test_mini_fb.rb",
      "test/test_helper.rb"
   ]
 
@@ -114,18 +137,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<facebooker>, ["= 1.0.62"])
+      s.add_runtime_dependency(%q<mini_fb>, ["= 0.2.2"])
       s.add_runtime_dependency(%q<delayed_job>, ["= 1.8.4"])
       s.add_runtime_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
     else
-      s.add_dependency(%q<facebooker>, ["= 1.0.62"])
+      s.add_dependency(%q<mini_fb>, ["= 0.2.2"])
       s.add_dependency(%q<delayed_job>, ["= 1.8.4"])
       s.add_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
       s.add_dependency(%q<shoulda>, [">= 0"])
     end
   else
-    s.add_dependency(%q<facebooker>, ["= 1.0.62"])
+    s.add_dependency(%q<mini_fb>, ["= 0.2.2"])
     s.add_dependency(%q<delayed_job>, ["= 1.8.4"])
     s.add_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
     s.add_dependency(%q<shoulda>, [">= 0"])

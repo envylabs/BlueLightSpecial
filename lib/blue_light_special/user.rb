@@ -179,7 +179,7 @@ module BlueLightSpecial
       # facebook, etc).
       # @return [Boolean] true if the password field can be left blank for this user
       def password_optional?
-        encrypted_password.present? && password.blank?
+        facebook_user? || (encrypted_password.present? && password.blank?)
       end
 
       def password_required?
@@ -205,11 +205,22 @@ module BlueLightSpecial
         return user if     user.authenticated?(password)
       end
       
-      def find_facebook_user(facebook_user)
-        user = ::User.find_by_facebook_uid(facebook_user.uid) || ::User.new
+      def find_facebook_user(facebook_session, facebook_uid)
+        return nil unless BlueLightSpecial.configuration.use_facebook_connect && facebook_session && facebook_uid
+        
+        begin
+          facebook_user = MiniFB::Session.new(BlueLightSpecial.configuration.facebook_api_key,
+                                              BlueLightSpecial.configuration.facebook_secret_key,
+                                              facebook_session, facebook_uid).user
+        rescue MiniFB::FaceBookError
+          facebook_user = nil
+        end
+        return nil unless facebook_user
+        
+        user = ::User.find_by_facebook_uid(facebook_uid) || ::User.find_by_email(facebook_user['email']) || ::User.new
         user.tap do |user|
-          user.facebook_uid     = facebook_user.uid
-          user.email            = facebook_user.email
+          user.facebook_uid     = facebook_uid
+          user.email            = facebook_user['email']
           user.save
         end
       end

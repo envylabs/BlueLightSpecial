@@ -1,7 +1,5 @@
 en:
   blue_light_special:
-    authentication:
-      facebook_log_out: Bye bye Facebook
     models:
       blue_light_special_mailer:
         change_password: Change your password

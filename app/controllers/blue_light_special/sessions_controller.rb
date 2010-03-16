@@ -10,8 +10,13 @@ class BlueLightSpecial::SessionsController < ApplicationController
   end
 
   def create
-    @user = ::User.authenticate(params[:session][:email],
-                                params[:session][:password])
+    @user = if params[:session]
+      ::User.authenticate(params[:session][:email], params[:session][:password])
+    else
+      ::User.find_facebook_user(cookies[BlueLightSpecial.configuration.facebook_api_key + "_session_key"],
+                                cookies[BlueLightSpecial.configuration.facebook_api_key + "_user"])
+    end
+      
     if @user.nil?
       flash_failure_after_create
       render :template => 'sessions/new', :status => :unauthorized
@@ -23,6 +28,8 @@ class BlueLightSpecial::SessionsController < ApplicationController
   end
 
   def destroy
+    cookies[BlueLightSpecial.configuration.facebook_api_key + "_user"] = nil
+    cookies[BlueLightSpecial.configuration.facebook_api_key + "_session_key"] = nil
     sign_out
     flash_success_after_destroy
     redirect_to(url_after_destroy)

@@ -1,3 +1,16 @@
+<%- if BlueLightSpecial.configuration.use_facebook_connect -%>
+  <%- if request.ssl? -%>
+    <%= javascript_include_tag 'https://ssl.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_US' %>
+  <%- else -%>
+    <%= javascript_include_tag 'http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_US' %>
+  <%- end -%>
+  <script>
+    function facebook_onlogin() {
+      document.location.href = "<%= fb_connect_path %>";
+    }
+  </script>
+<%- end -%>
+
 <h2>Sign in</h2>
 
 <% form_for :session, :url => session_path do |form| %>
@@ -11,6 +24,9 @@
   </div>
   <div class="submit_field">
     <%= form.submit "Sign in", :disable_with => "Please wait..." %>
+    <%- if BlueLightSpecial.configuration.use_facebook_connect -%>
+      or <fb:login-button onlogin="facebook_onlogin();" length="long" v="2" size="large"></fb:login-button>
+    <%- end -%>
   </div>
 <% end %>
 
@@ -22,3 +38,11 @@
     <%= link_to "Forgot password?", new_password_path %>
   </li>
 </ul>
+
+<%- if BlueLightSpecial.configuration.use_facebook_connect -%>
+  <script type="text/javascript">
+    FB.init("<%= BlueLightSpecial.configuration.facebook_api_key %>", "xd_receiver.html", {
+      permsToRequestOnConnect : "email",
+    });
+  </script>
+<%- end -%>

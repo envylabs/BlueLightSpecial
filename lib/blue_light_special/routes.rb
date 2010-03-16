@@ -33,16 +33,19 @@ module BlueLightSpecial
         :controller => 'blue_light_special/impersonations',
         :only       => [:create, :destroy]
       
-      map.sign_up  'sign_up',
-        :controller => 'blue_light_special/users',
-        :action     => 'new'
-      map.sign_in  'sign_in',
-        :controller => 'blue_light_special/sessions',
-        :action     => 'new'
-      map.sign_out 'sign_out',
-        :controller => 'blue_light_special/sessions',
-        :action     => 'destroy',
-        :method     => :delete
+      map.sign_up    'sign_up',
+        :controller   => 'blue_light_special/users',
+        :action       => 'new'
+      map.sign_in    'sign_in',
+        :controller   => 'blue_light_special/sessions',
+        :action       => 'new'
+      map.fb_connect 'fb_connect',
+        :controller   => 'blue_light_special/sessions',
+        :action       => 'create'
+      map.sign_out   'sign_out',
+        :controller   => 'blue_light_special/sessions',
+        :action       => 'destroy',
+        :method       => :delete
     end
 
   end

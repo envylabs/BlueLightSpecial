@@ -2,10 +2,14 @@ module BlueLightSpecial
   class Configuration
     attr_accessor :mailer_sender
     attr_accessor :impersonation_hash
+    attr_accessor :use_facebook_connect
+    attr_accessor :facebook_api_key
+    attr_accessor :facebook_secret_key
 
     def initialize
-      @mailer_sender      = 'donotreply@example.com'
-      @impersonation_hash = 'e76e05e1ddf74560ffb64c02a1c1b26c'
+      @mailer_sender          = 'donotreply@example.com'
+      @impersonation_hash     = 'e76e05e1ddf74560ffb64c02a1c1b26c'
+      @user_facebook_connect  = false
     end
   end
 

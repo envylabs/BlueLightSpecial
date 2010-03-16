@@ -3,16 +3,19 @@
 
 Next:
 
-1. To run the generated tests, you'll need shoulda, factory_girl, and webrat.
+1. To run the generated tests, you'll need shoulda, factory_girl, webrat, and fakeweb.
    Update your config/environments/test.rb:
 
      config.gem "shoulda"
      config.gem "factory_girl"
      config.gem "webrat"
+     config.gem "fakeweb"
   
   Unless they are already included.
 
 2. Update your test_helper.rb with:
+
+     FakeWeb.allow_net_connect = false
 
      Webrat.configure do |config|
        config.mode             = :rails
@@ -48,4 +51,6 @@ Next:
        
      end
      
+3. Be sure to define a root_url in routes.rb.
+
 *******************************************************************************

@@ -31,3 +31,7 @@ config.gem 'factory_girl',
 config.gem 'webrat',
   :lib     => false,
   :version => '>= 0.6.0'
+
+config.gem 'fakeweb',
+  :source  => "http://gemcutter.org",
+  :version => '>= 1.2.8'
