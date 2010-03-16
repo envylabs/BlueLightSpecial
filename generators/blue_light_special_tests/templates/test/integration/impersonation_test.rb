@@ -20,7 +20,7 @@ class ImpersonationTest < ActionController::IntegrationTest
     end
     
     should 'be able to go back to the original admin user' do
-      delete impersonation_url
+      click_link "Stop impersonating"
       assert controller.signed_in?
       assert_equal controller.current_user, @admin_user
     end
@@ -32,7 +32,8 @@ class ImpersonationTest < ActionController::IntegrationTest
   
   
   def impersonate(user)
-    post impersonation_url(:user_id => user)
+    visit impersonations_url
+    click_link "impersonate_#{user.id}"
   end
   
 end

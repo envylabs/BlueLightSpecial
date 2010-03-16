@@ -3,6 +3,11 @@ class BlueLightSpecial::ImpersonationsController < ApplicationController
   before_filter :check_role, :except => :destroy
   
   
+  def index
+    @users = User.all
+    render :template => 'impersonations/index'
+  end
+  
   def create
     user = User.find(params[:user_id])
     if user == current_user
@@ -23,7 +28,7 @@ class BlueLightSpecial::ImpersonationsController < ApplicationController
       session[:admin_user_id]       = nil
       session[:impersonation_hash]  = nil
       sign_in(admin_user)
-      redirect_to root_url
+      redirect_to impersonations_url
     else
       deny_access
     end

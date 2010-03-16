@@ -29,10 +29,13 @@ module BlueLightSpecial
           :only       => [:create, :edit, :update]
       end
       
-      map.resource  :impersonation,
+      map.resource :impersonation,
         :controller => 'blue_light_special/impersonations',
         :only       => [:create, :destroy]
-      
+      map.resources :impersonations,
+        :controller => 'blue_light_special/impersonations',
+        :only       => :index
+        
       map.sign_up    'sign_up',
         :controller   => 'blue_light_special/users',
         :action       => 'new'

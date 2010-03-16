@@ -27,11 +27,11 @@
       | <%= link_to 'Stop impersonating', impersonation_path, :method => :delete %>
     <% else %>
       Welcome, <%= current_user.name %>
-      | <%= link_to('Sign out', sign_out_path) %>
+      | <%= link_to 'Sign out', sign_out_path %>
     <% end %>
     
     <% if current_user.admin? %>
-      | <%= link_to 'Admin', '#' %>
+      | <%= link_to 'Admin', impersonations_path %>
     <% end %>
     
     | <%= link_to 'My Profile', user_path(current_user) %>
