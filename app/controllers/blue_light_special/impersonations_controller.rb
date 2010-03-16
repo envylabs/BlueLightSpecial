@@ -6,7 +6,7 @@ class BlueLightSpecial::ImpersonationsController < ApplicationController
   def create
     user = User.find(params[:user_id])
     if user == current_user
-      flash[:error] = "Cannot impersonate yourself"
+      flash[:failure] = "Cannot impersonate yourself"
       redirect_to root_url
     else
       session[:admin_user_id]       = current_user.id

@@ -1,0 +1,31 @@
+/* Flash messages */
+
+.notice_flash,
+.failure_flash, 
+.success_flash {
+	border: 1px solid;
+	padding: 3px;
+	padding:15px 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	margin-bottom: 10px;
+	font-weight: bold;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.notice_flash {
+	color: #00529B;
+	background-color: #BDE5F8;
+}
+
+.failure_flash {
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.success_flash {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}

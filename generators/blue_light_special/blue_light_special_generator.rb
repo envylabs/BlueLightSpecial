@@ -8,6 +8,12 @@ class BlueLightSpecialGenerator < Rails::Generator::Base
       m.directory File.join("config", "initializers")
       m.file "blue_light_special.rb", "config/initializers/blue_light_special.rb"
 
+      m.directory File.join("app", "views", "layouts")
+      m.file "application.html.erb", "app/views/layouts/application.html.erb"
+
+      m.directory File.join("public", "stylesheets")
+      m.file "style.css", "public/stylesheets/style.css"
+
       m.file "xd_receiver.html", "public/xd_receiver.html"
       m.file "xd_receiver_ssl.html", "public/xd_receiver_ssl.html"
       
