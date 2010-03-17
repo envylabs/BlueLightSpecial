@@ -21,20 +21,21 @@ Clearance, a default BlueLightSpecial installation includes:
 
 == Setup
 
-After installing the BlueLightSpecial gem, create a new Rails app and run
-the blue_light_special generator:
+After installing the BlueLightSpecial gem, require it in your Rails app and run
+the blue_light_special generator.
 
-	rails my_app
-	cd my_app
-	script/generate blue_light_special
-	
-Then, run the delayed_job migration generator and migrate your database:
+In your config/environment.rb:
 
-	script/generate delayed_job
-	rake db:migrate
+  config.gem 'blue_light_special'
+
+Run the generators and migrate your database:
+
+  script/generate blue_light_special
+  script/generate delayed_job
+  rake db:migrate
 	
-You'll also want to update BlueLightSpecial's configuration options
-in config/initializers/blue_light_special.rb.
+You'll also want to take a look at BlueLightSpecial's configuration options
+in config/blue_light_special.yml.
 
 == Tests
 
@@ -43,7 +44,7 @@ of its basic features.  These tests require {shoulda}[http://github.com/thoughtb
 {factory_girl}[http://github.com/thoughtbot/factory_girl], {webrat}[http://github.com/brynary/webrat],
 and {fakeweb}[http://github.com/chrisk/fakeweb].  To install the tests:
 
-	script/generate blue_light_special_tests
+  script/generate blue_light_special_tests
 	
 After the generator runs, you'll see  instructions for updating
 test/test_helper.rb to include some helper methods that the tests require.
@@ -57,7 +58,7 @@ interface for your app.  This allows admins to manage and impersonate users,
 and it can be used as a starting point for building a more elaborate admin
 interface.  If you'd like to generate the admin interface, run:
 
-	script/generate blue_light_special_admin
+  script/generate blue_light_special_admin
 	
 This will generate your user admin controller and its integration test.
 
