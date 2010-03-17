@@ -7,19 +7,19 @@ opinionated starting point for many of our projects at Envy Labs.
 In addition to the basic email and password authentication provided by
 Clearance, a default BlueLightSpecial installation includes:
 
-	* optional support for authenticating with Facebook Connect, using
-		{mini_fb}[http://github.com/appoxy/mini_fb]
+* optional support for authenticating with Facebook Connect, using
+	{mini_fb}[http://github.com/appoxy/mini_fb]
+
+* a simple role system with built-in support for admin users
+
+* the ability for an admin to impersonate any other user
+
+* use of {MadMimi}[http://madmimi.com] for sending notification emails
+
+* {delayed_job}[http://github.com/tobi/delayed_job] for sending emails
+	in the background
 	
-	* a simple role system with built-in support for admin users
-	
-	* the ability for an admin to impersonate any other user
-	
-	* use of {MadMimi}[http://madmimi.com] for sending notification emails
-	
-	* {delayed_job}[http://github.com/tobi/delayed_job] for sending emails
-		in the background
-		
-	* a basic application layout and stylesheet
+* a basic application layout and stylesheet
 
 == Setup
 
