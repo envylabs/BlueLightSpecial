@@ -10,7 +10,7 @@ begin
     gem.description = %Q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
     gem.email       = "nate@envylabs.com"
     gem.homepage    = "http://github.com/envylabs/blue_light_special"
-    gem.authors     = ["Nathaniel Bibler", "Mark Kendall"]
+    gem.authors     = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
     gem.files       = FileList["[A-Z]*", "{app,config,generators,lib,shoulda_macros,rails}/**/*"]
     
     gem.add_dependency "mini_fb", '=0.2.2'

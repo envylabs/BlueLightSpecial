@@ -1,10 +1,67 @@
 = BlueLightSpecial
 
 BlueLightSpecial is a derivative from Thoughtbot's 
-{Clearance}[http://github.com/thoughtbot/clearance] gem.  It authenticates 
-a visitor by email and password, but additionally integrates MadMimi for 
-outgoing notification emails.  Also, a role system and administrative user
-impersonation are baked in.
+{Clearance}[http://github.com/thoughtbot/clearance] gem.  It's a highly
+opinionated starting point for many of our projects at Envy Labs.
+
+In addition to the basic email and password authentication provided by
+Clearance, a default BlueLightSpecial installation includes:
+
+	* optional support for authenticating with Facebook Connect, using
+		{mini_fb}[http://github.com/appoxy/mini_fb]
+	
+	* a simple role system with built-in support for admin users
+	
+	* the ability for an admin to impersonate any other user
+	
+	* use of {MadMimi}[http://madmimi.com] for sending notification emails
+	
+	* {delayed_job}[http://github.com/tobi/delayed_job] for sending emails
+		in the background
+		
+	* a basic application layout and stylesheet
+
+== Setup
+
+After installing the BlueLightSpecial gem, create a new Rails app and run
+the blue_light_special generator:
+
+	rails my_app
+	cd my_app
+	script/generate blue_light_special
+	
+Then, run the delayed_job migration generator and migrate your database:
+
+	script/generate delayed_job
+	rake db:migrate
+	
+You'll also want to update BlueLightSpecial's configuration options
+in config/initializers/blue_light_special.rb.
+
+== Tests
+
+BlueLightSpecial can optionally generate integration tests that cover all
+of its basic features.  These tests require {shoulda}[http://github.com/thoughtbot/shoulda],
+{factory_girl}[http://github.com/thoughtbot/factory_girl], {webrat}[http://github.com/brynary/webrat],
+and {fakeweb}[http://github.com/chrisk/fakeweb].  To install the tests:
+
+	script/generate blue_light_special_tests
+	
+After the generator runs, you'll see  instructions for updating
+test/test_helper.rb to include some helper methods that the tests require.
+You can also use these helper methods in your own integration tests whenever
+you need to sign a user in or out.
+
+== Administration Interface
+
+The final BlueLightSpecial generator builds a very simple administration
+interface for your app.  This allows admins to manage and impersonate users,
+and it can be used as a starting point for building a more elaborate admin
+interface.  If you'd like to generate the admin interface, run:
+
+	script/generate blue_light_special_admin
+	
+This will generate your user admin controller and its integration test.
 
 == Copyright
 
