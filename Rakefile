@@ -37,7 +37,7 @@ namespace :test do
   end
 end
 
-generators = %w(blue_light_special blue_light_special_tests)
+generators = %w(blue_light_special blue_light_special_tests blue_light_special_admin)
 
 namespace :generator do
   desc "Cleans up the test app before running the generator"
@@ -54,7 +54,7 @@ namespace :generator do
   
   desc "Run the blue_light_special generator"
   task :blue_light_special do
-    system "cd test/rails_root && ./script/generate blue_light_special -f && ./script/generate delayed_job && ./script/generate facebook && rake gems:unpack && rake db:migrate db:test:prepare"
+    system "cd test/rails_root && ./script/generate blue_light_special -f && ./script/generate delayed_job && rake gems:unpack && rake db:migrate db:test:prepare"
   end
 
   desc "Run the blue_light_special tests generator"

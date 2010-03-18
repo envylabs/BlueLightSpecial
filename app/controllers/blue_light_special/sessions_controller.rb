@@ -28,8 +28,10 @@ class BlueLightSpecial::SessionsController < ApplicationController
   end
 
   def destroy
-    cookies[BlueLightSpecial.configuration.facebook_api_key + "_user"] = nil
-    cookies[BlueLightSpecial.configuration.facebook_api_key + "_session_key"] = nil
+    if BlueLightSpecial.configuration.use_facebook_connect
+      cookies[BlueLightSpecial.configuration.facebook_api_key + "_user"] = nil
+      cookies[BlueLightSpecial.configuration.facebook_api_key + "_session_key"] = nil
+    end
     sign_out
     flash_success_after_destroy
     redirect_to(url_after_destroy)

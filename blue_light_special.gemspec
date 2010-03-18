@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Nathaniel Bibler", "Mark Kendall"]
-  s.date = %q{2010-03-16}
+  s.authors = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
+  s.date = %q{2010-03-17}
   s.description = %q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
   s.email = %q{nate@envylabs.com}
   s.extra_rdoc_files = [
@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
      "generators/blue_light_special/templates/README",
      "generators/blue_light_special/templates/application.html.erb",
      "generators/blue_light_special/templates/blue_light_special.rb",
+     "generators/blue_light_special/templates/blue_light_special.yml",
      "generators/blue_light_special/templates/factories.rb",
      "generators/blue_light_special/templates/migrations/create_users.rb",
      "generators/blue_light_special/templates/migrations/update_users.rb",
@@ -115,8 +116,6 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/requires.rb",
      "test/rails_root/config/initializers/time_formats.rb",
      "test/rails_root/config/routes.rb",
-     "test/rails_root/db/migrate/20100316205122_blue_light_special_create_users.rb",
-     "test/rails_root/db/migrate/20100316205123_create_delayed_jobs.rb",
      "test/rails_root/public/dispatch.rb",
      "test/rails_root/script/create_project.rb",
      "test/rails_root/test/factories/user.rb",

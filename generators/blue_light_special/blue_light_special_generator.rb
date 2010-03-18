@@ -6,7 +6,8 @@ class BlueLightSpecialGenerator < Rails::Generator::Base
   def manifest
     record do |m|
       m.directory File.join("config", "initializers")
-      m.file "blue_light_special.rb", "config/initializers/blue_light_special.rb"
+      m.file "blue_light_special.rb",  "config/initializers/blue_light_special.rb"
+      m.file "blue_light_special.yml", "config/blue_light_special.yml"
 
       m.directory File.join("app", "views", "layouts")
       m.file "application.html.erb", "app/views/layouts/application.html.erb"
