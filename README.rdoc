@@ -1,11 +1,11 @@
-= BlueLightSpecial
+= Blue Light Special
 
-BlueLightSpecial is a derivative from Thoughtbot's 
+Blue Light Special is a derivative from Thoughtbot's 
 {Clearance}[http://github.com/thoughtbot/clearance] gem.  It's a highly
 opinionated starting point for many of our projects at Envy Labs.
 
 In addition to the basic email and password authentication provided by
-Clearance, a default BlueLightSpecial installation includes:
+Clearance, a default Blue Light Special installation includes:
 
 * optional support for authenticating with Facebook Connect, using {mini_fb}[http://github.com/appoxy/mini_fb]
 
@@ -21,7 +21,7 @@ Clearance, a default BlueLightSpecial installation includes:
 
 == Setup
 
-After installing the BlueLightSpecial gem, require it in your Rails app and run
+After installing the Blue Light Special gem, require it in your Rails app and run
 the blue_light_special generator.
 
 In your config/environment.rb:
@@ -34,12 +34,12 @@ Run the generators and migrate your database:
   script/generate delayed_job
   rake db:migrate
 	
-You'll also want to take a look at BlueLightSpecial's configuration options
+You'll also want to take a look at Blue Light Special's configuration options
 in config/blue_light_special.yml.
 
 == Tests
 
-BlueLightSpecial can optionally generate integration tests that cover all
+Blue Light Special can optionally generate integration tests that cover all
 of its basic features.  These tests require {shoulda}[http://github.com/thoughtbot/shoulda],
 {factory_girl}[http://github.com/thoughtbot/factory_girl], {webrat}[http://github.com/brynary/webrat],
 and {fakeweb}[http://github.com/chrisk/fakeweb].  To install the tests:
@@ -53,7 +53,7 @@ you need to sign a user in or out.
 
 == Administration Interface
 
-The final BlueLightSpecial generator builds a very simple administration
+The final Blue Light Special generator builds a very simple administration
 interface for your app.  This allows admins to manage and impersonate users,
 and it can be used as a starting point for building a more elaborate admin
 interface.  If you'd like to generate the admin interface, run:
