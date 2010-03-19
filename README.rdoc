@@ -13,7 +13,7 @@ Clearance, a default Blue Light Special installation includes:
 
 * the ability for an admin to impersonate any other user
 
-* use of {MadMimi}[http://madmimi.com] for sending notification emails
+* use of {MadMimi}[http://madmimi.com/r/b8599b9343f82e3bc30984ca4f3fea3f] for sending notification emails
 
 * {delayed_job}[http://github.com/tobi/delayed_job] for sending emails in the background
 	

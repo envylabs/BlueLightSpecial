@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{blue_light_special}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
-  s.date = %q{2010-03-17}
+  s.date = %q{2010-03-18}
   s.description = %q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
   s.email = %q{nate@envylabs.com}
   s.extra_rdoc_files = [
@@ -116,6 +116,8 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/requires.rb",
      "test/rails_root/config/initializers/time_formats.rb",
      "test/rails_root/config/routes.rb",
+     "test/rails_root/db/migrate/20100318015023_blue_light_special_create_users.rb",
+     "test/rails_root/db/migrate/20100318015024_create_delayed_jobs.rb",
      "test/rails_root/public/dispatch.rb",
      "test/rails_root/script/create_project.rb",
      "test/rails_root/test/factories/user.rb",
