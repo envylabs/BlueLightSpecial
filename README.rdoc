@@ -62,6 +62,34 @@ interface.  If you'd like to generate the admin interface, run:
 	
 This will generate your user admin controller and its integration test.
 
+== Mad Mimi
+
+If you'd like an overview of Mad Mimi, check out the third part of
+{this screencast}[http://railslab.newrelic.com/2009/10/23/episode-21-on-the-edge-part-3].
+In order to get Blue Light Special working with Mad Mimi, you'll need to sign
+up for an account at {madmimi.com}[http://madmimi.com/r/b8599b9343f82e3bc30984ca4f3fea3f].
+
+Your Mad Mimi account needs API access, so be sure to enable that during the signup
+process. The support people at Mad Mimi will manually authorize your account for
+API access. This usually happens within a few hours after you've signed up. Until
+your account is authorized, you'll see HTTP errors when your Rails app attempts to
+send email.
+
+After you've signed up and your API access has been approved, all you'll need to do is
+put your Mad Mimi username and API key in config/blue_light_special.yml.
+
+== Facebook Connect
+
+To set up Facebook Connect, go to the {Facebook developer page}[http://facebook.com/developers]
+and create a new Facebook app. Since you're only using this app for Facebook Connect,
+you can leave most of the fields blank. Be sure to give your app a name, and then
+head over to the Connect settings and set the Connect URL to point at your Rails app.
+In the Advanced section, you'll need to set Email Domain to the domain from which you'll
+be sending email messages.
+
+After you've finished setting up your Facebook app, grab its API key and secret key
+and put them in config/blue_light_special.yml.
+
 == Copyright
 
 Copyright (c) 2010 Envy Labs LLC. See LICENSE for details.
