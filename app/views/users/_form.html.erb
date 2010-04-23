@@ -1,4 +1,14 @@
-<%= form.error_messages %>
+<% if @user.errors.any? %>
+  <div id="errorExplanation">
+    <h2>The following errors prohibited this form from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <p class="text_field">
   <%= form.label :email %>
   <%= form.text_field :email %>

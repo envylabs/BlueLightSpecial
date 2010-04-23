@@ -1,0 +1,25 @@
+
+*******************************************************************************
+
+Next:
+
+1. Configure default url options for the mailer to generate URLs in emails.
+   In production.rb it must be the actual host your application is deployed to.
+   In config/environments/test.rb and config/environments/development.rb:
+
+     config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+2. Make sure passwords won't be displayed in your log files. Add the following
+   in config/application.rb:
+
+     config.filter_parameters += [:password, :password_confirmation]
+
+3. If you haven't already, be sure you have delayed_jobs setup and configured:
+
+     rails generate delayed_job
+
+4. Migrate:
+
+     rake db:migrate
+
+*******************************************************************************

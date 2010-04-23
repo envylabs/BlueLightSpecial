@@ -1,7 +1,8 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) +
                          "/rails_root/config/environment")
-require 'test_help'
+require 'rails/test_help'
+require 'shoulda'
 
 $: << File.expand_path(File.dirname(__FILE__) + '/..')
 require 'blue_light_special'
@@ -19,3 +20,5 @@ class ActiveSupport::TestCase
 end
 
 FakeWeb.allow_net_connect = false
+
+require 'test/rails_root/test/factories/user.rb'

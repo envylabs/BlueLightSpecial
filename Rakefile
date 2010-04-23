@@ -13,11 +13,15 @@ begin
     gem.authors     = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
     gem.files       = FileList["[A-Z]*", "{app,config,generators,lib,shoulda_macros,rails}/**/*"]
     
-    gem.add_dependency "mini_fb", '=0.2.2'
-    gem.add_dependency "delayed_job", '=1.8.4'
-    gem.add_dependency "mad_mimi_mailer", '=0.0.7'
+    gem.add_dependency "mini_fb", '=0.2.5'
+    gem.add_dependency "delayed_job", '=2.0.3'
+    gem.add_dependency "mad_mimi_mailer", '=0.0.9'
     
     gem.add_development_dependency "shoulda", ">= 0"
+    gem.add_development_dependency "factory_girl", ">= 0"
+    gem.add_development_dependency "webrat", ">= 0"
+    gem.add_development_dependency "fakeweb", ">= 0"
+    gem.add_development_dependency "mocha", ">= 0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
@@ -30,10 +34,15 @@ namespace :test do
                                 "generator:blue_light_special",
                                 "generator:blue_light_special_tests",
                                 "generator:blue_light_special_admin"]) do |task|
+    ENV['BUNDLE_GEMFILE'] = "test/rails_root/Gemfile"
     task.libs << "lib"
     task.libs << "test"
     task.pattern = "test/{controllers,models}/*_test.rb"
     task.verbose = false
+  end
+
+  task :extended => :basic do
+    system "cd test/rails_root && rake test"
   end
 end
 
@@ -54,17 +63,23 @@ namespace :generator do
   
   desc "Run the blue_light_special generator"
   task :blue_light_special do
-    system "cd test/rails_root && ./script/generate blue_light_special -f && ./script/generate delayed_job && rake gems:unpack && rake db:migrate db:test:prepare"
+    ENV['BUNDLE_GEMFILE'] = nil
+    system "cd test/rails_root && rails generate blue_light_special -f && rails generate delayed_job && rake db:migrate db:test:prepare"
+    ENV['BUNDLE_GEMFILE'] = "test/rails_root/Gemfile"
   end
 
   desc "Run the blue_light_special tests generator"
   task :blue_light_special_tests do
-    system "cd test/rails_root && ./script/generate blue_light_special_tests -f"
+    ENV['BUNDLE_GEMFILE'] = nil
+    system "cd test/rails_root && rails generate blue_light_special_tests -f"
+    ENV['BUNDLE_GEMFILE'] = "test/rails_root/Gemfile"
   end
 
   desc "Run the blue_light_special admin generator"
   task :blue_light_special_admin do
-    system "cd test/rails_root && ./script/generate blue_light_special_admin -f"
+    ENV['BUNDLE_GEMFILE'] = nil
+    system "cd test/rails_root && rails generate blue_light_special_admin -f"
+    ENV['BUNDLE_GEMFILE'] = "test/rails_root/Gemfile"
   end
   
 end

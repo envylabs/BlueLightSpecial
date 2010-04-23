@@ -31,7 +31,7 @@ class PasswordsControllerTest < ActionController::TestCase
         end
 
         should "send the change your password email" do
-          Delayed::Job.work_off
+          Delayed::Worker.new.work_off
           assert_sent_email do |email|
             email.subject =~ /change your password/i
           end

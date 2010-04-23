@@ -1,0 +1,35 @@
+<% if @user.errors.any? %>
+  <div id="errorExplanation">
+    <h2>The following errors prohibited this form from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<p class="text_field">
+  <%= form.label :first_name %>
+  <%= form.text_field :first_name %>
+</p>
+<p class="text_field">
+  <%= form.label :last_name %>
+  <%= form.text_field :last_name %>
+</p>
+<p class="text_field">
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+</p>
+<p class="password_field">
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+</p>
+<p class="password_field">
+  <%= form.label :password_confirmation, "Confirm password" %>
+  <%= form.password_field :password_confirmation %>
+</p>
+<p>
+  <%= form.label :role %>
+  <%= form.collection_select :role, ['', 'admin'], :to_s, :to_s %>
+</p>

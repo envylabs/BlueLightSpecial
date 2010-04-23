@@ -11,17 +11,17 @@ class BlueLightSpecialMailerTest < ActiveSupport::TestCase
     end
 
     should "be from DO_NOT_REPLY" do
-      assert_equal BlueLightSpecial.configuration.mailer_sender, @email.from
+      assert_equal [BlueLightSpecial.configuration.mailer_sender], @email.from
     end
 
     should "be sent to user" do
-      assert_match /#{@user.email}/i, @email.recipients
+      assert_match /#{@user.email}/i, @email['to'].to_s
     end
 
     should "contain a link to edit the user's password" do
       host = ActionMailer::Base.default_url_options[:host]
       regexp = %r{http://#{host}/users/#{@user.id}/password/edit\?token=#{@user.password_reset_token}}
-      assert_match regexp, @email.body[:url]
+      assert_match regexp, @email.body.to_s #[:url]
     end
     
     should "set its subject" do
@@ -32,16 +32,16 @@ class BlueLightSpecialMailerTest < ActiveSupport::TestCase
   context "A welcome email" do
     setup do
       @user  = Factory(:user)
-      Delayed::Job.work_off
+      Delayed::Worker.new.work_off
       @email = ActionMailer::Base.deliveries.last
     end
 
     should "be from DO_NOT_REPLY" do
-      assert_equal BlueLightSpecial.configuration.mailer_sender, @email.from
+      assert_equal [BlueLightSpecial.configuration.mailer_sender], @email.from
     end
 
     should "be sent to user" do
-      assert_match /#{@user.email}/i, @email.recipients
+      assert_match /#{@user.email}/i, @email['to'].to_s
     end
 
     should "set its subject" do
