@@ -195,7 +195,7 @@ class Admin::UsersTest < ActionController::IntegrationTest
   
   def delete_user(user)
     visit admin_user_url(user)
-    click_button 'Delete'
+    click_link 'Delete', :method => :delete
   end
     
 end
