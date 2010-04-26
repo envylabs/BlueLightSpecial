@@ -20,6 +20,9 @@ class BlueLightSpecialGenerator < Rails::Generators::Base
     empty_directory File.join("public", "stylesheets")
     copy_file "style.css", "public/stylesheets/style.css"
 
+    empty_directory File.join("public", "javascripts")
+    copy_file "rails.js", "public/javascripts/rails.js"
+
     copy_file "xd_receiver.html", "public/xd_receiver.html"
     copy_file "xd_receiver_ssl.html", "public/xd_receiver_ssl.html"
 

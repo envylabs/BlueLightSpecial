@@ -36,8 +36,8 @@ class SignUpTest < ActionController::IntegrationTest
         user = User.find_by_email('bob@bob.bob')
         Delayed::Worker.new.work_off
         sent = ActionMailer::Base.deliveries.last
-        assert_equal user.email, sent.recipients
-        assert_match /welcome/i, sent.subject
+        assert_equal user.email, sent[:to].to_s
+        assert_match /welcome/i, sent[:subject].to_s
       end
       
     end

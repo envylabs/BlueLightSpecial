@@ -17,14 +17,14 @@
 	<%- else -%>
 	  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' %>
 	<%- end -%>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'rails', 'application' %>
 </head>
 <body>
   
   <% if signed_in? %>
     <% if impersonating? %>
       Impersonating <%= current_user.name %>
-      | <%= link_to 'Stop impersonating', impersonation_path, :method => :delete %>
+      | <%= link_to 'Stop impersonating', stop_impersonating_path %>
     <% else %>
       Welcome, <%= current_user.name %>
       | <%= link_to 'Sign out', sign_out_path %>

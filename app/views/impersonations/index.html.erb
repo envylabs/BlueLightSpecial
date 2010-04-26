@@ -1,5 +1,5 @@
 <ul>
   <% @users.each do |user| %>
-    <li><%=h user.name %> <%= link_to 'Impersonate', impersonation_path(:user_id => user.id), :method => :post, :id => "impersonate_#{user.id}" %></li>
+    <li><%=h user.name %> <%= link_to 'Impersonate', impersonate_path(:user_id => user.id), :id => "impersonate_#{user.id}" %></li>
   <% end %>
 </ul>

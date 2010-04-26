@@ -42,6 +42,7 @@ namespace :test do
   end
 
   task :extended => :basic do
+    ENV['BUNDLE_GEMFILE'] = nil
     system "cd test/rails_root && rake test"
   end
 end

@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
 
   tests BlueLightSpecial::UsersController
 
-  should_filter_params :password
+  # should_filter_params :password
 
   context "when signed out" do
     setup { sign_out }
@@ -32,13 +32,16 @@ class UsersControllerTest < ActionController::TestCase
 
     context "on POST to #create with valid attributes" do
       setup do
-        user_attributes = Factory.attributes_for(:user)
-        post :create, :user => user_attributes
+        @user_attributes = Factory.attributes_for(:user)
+        post :create, :user => @user_attributes
       end
 
       should_assign_to :user
-      should_change 'User.count', :by => 1
       should_redirect_to_url_after_create
+      
+      should 'create the user' do
+        assert User.find_by_email(@user_attributes[:email])
+      end
     end
   end
 

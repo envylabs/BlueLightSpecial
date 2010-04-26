@@ -43,9 +43,9 @@ class PasswordResetTest < ActionController::IntegrationTest
         Delayed::Worker.new.work_off
         assert !@user.password_reset_token.blank?
         assert_sent_email do |email|
-          email.recipients =~ /#{Regexp.escape @user.email}/i &&
-          email.subject =~ /password/i &&
-          email.body[:url] =~ /#{Regexp.escape @user.password_reset_token}/
+          email[:to].to_s =~ /#{Regexp.escape @user.email}/i &&
+          email[:subject].to_s =~ /password/i &&
+          email.body =~ /#{Regexp.escape @user.password_reset_token}/
         end
       end
       
