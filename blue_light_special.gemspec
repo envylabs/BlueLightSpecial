@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
-  s.date = %q{2010-03-19}
+  s.date = %q{2010-05-07}
   s.description = %q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
   s.email = %q{nate@envylabs.com}
   s.extra_rdoc_files = [
@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = [
-    "LICENSE",
+    "Gemfile",
+     "LICENSE",
      "README.rdoc",
      "Rakefile",
      "VERSION",
@@ -25,11 +26,11 @@ Gem::Specification.new do |s|
      "app/controllers/blue_light_special/passwords_controller.rb",
      "app/controllers/blue_light_special/sessions_controller.rb",
      "app/controllers/blue_light_special/users_controller.rb",
-     "app/models/blue_light_special_mailer.rb",
+     "app/mailers/blue_light_special_mailer.rb",
      "app/models/deliver_change_password_job.rb",
      "app/models/deliver_welcome_job.rb",
      "app/models/impersonation.rb",
-     "app/views/blue_light_special_mailer/change_password.html.erb",
+     "app/views/blue_light_special_mailer/mimi_change_password.html.erb",
      "app/views/impersonations/index.html.erb",
      "app/views/passwords/edit.html.erb",
      "app/views/passwords/new.html.erb",
@@ -38,43 +39,6 @@ Gem::Specification.new do |s|
      "app/views/users/edit.html.erb",
      "app/views/users/new.html.erb",
      "app/views/users/show.html.erb",
-     "generators/blue_light_special/USAGE",
-     "generators/blue_light_special/blue_light_special_generator.rb",
-     "generators/blue_light_special/lib/insert_commands.rb",
-     "generators/blue_light_special/lib/rake_commands.rb",
-     "generators/blue_light_special/templates/README",
-     "generators/blue_light_special/templates/application.html.erb",
-     "generators/blue_light_special/templates/blue_light_special.rb",
-     "generators/blue_light_special/templates/blue_light_special.yml",
-     "generators/blue_light_special/templates/factories.rb",
-     "generators/blue_light_special/templates/migrations/create_users.rb",
-     "generators/blue_light_special/templates/migrations/update_users.rb",
-     "generators/blue_light_special/templates/style.css",
-     "generators/blue_light_special/templates/user.rb",
-     "generators/blue_light_special/templates/xd_receiver.html",
-     "generators/blue_light_special/templates/xd_receiver_ssl.html",
-     "generators/blue_light_special_admin/USAGE",
-     "generators/blue_light_special_admin/blue_light_special_admin_generator.rb",
-     "generators/blue_light_special_admin/lib/insert_commands.rb",
-     "generators/blue_light_special_admin/templates/README",
-     "generators/blue_light_special_admin/templates/app/controllers/admin/admin_controller.rb",
-     "generators/blue_light_special_admin/templates/app/controllers/admin/users_controller.rb",
-     "generators/blue_light_special_admin/templates/app/views/admin/users/_form.html.erb",
-     "generators/blue_light_special_admin/templates/app/views/admin/users/edit.html.erb",
-     "generators/blue_light_special_admin/templates/app/views/admin/users/index.html.erb",
-     "generators/blue_light_special_admin/templates/app/views/admin/users/new.html.erb",
-     "generators/blue_light_special_admin/templates/app/views/admin/users/show.html.erb",
-     "generators/blue_light_special_admin/templates/test/integration/admin/users_test.rb",
-     "generators/blue_light_special_tests/USAGE",
-     "generators/blue_light_special_tests/blue_light_special_tests_generator.rb",
-     "generators/blue_light_special_tests/templates/README",
-     "generators/blue_light_special_tests/templates/test/integration/edit_profile_test.rb",
-     "generators/blue_light_special_tests/templates/test/integration/facebook_test.rb",
-     "generators/blue_light_special_tests/templates/test/integration/impersonation_test.rb",
-     "generators/blue_light_special_tests/templates/test/integration/password_reset_test.rb",
-     "generators/blue_light_special_tests/templates/test/integration/sign_in_test.rb",
-     "generators/blue_light_special_tests/templates/test/integration/sign_out_test.rb",
-     "generators/blue_light_special_tests/templates/test/integration/sign_up_test.rb",
      "lib/blue_light_special.rb",
      "lib/blue_light_special/authentication.rb",
      "lib/blue_light_special/configuration.rb",
@@ -82,13 +46,50 @@ Gem::Specification.new do |s|
      "lib/blue_light_special/extensions/rescue.rb",
      "lib/blue_light_special/routes.rb",
      "lib/blue_light_special/user.rb",
-     "rails/init.rb",
+     "lib/generators/blue_light_special/USAGE",
+     "lib/generators/blue_light_special/blue_light_special_generator.rb",
+     "lib/generators/blue_light_special/templates/README",
+     "lib/generators/blue_light_special/templates/application.html.erb",
+     "lib/generators/blue_light_special/templates/blue_light_special.rb",
+     "lib/generators/blue_light_special/templates/blue_light_special.yml",
+     "lib/generators/blue_light_special/templates/factories.rb",
+     "lib/generators/blue_light_special/templates/migrations/create_users.rb",
+     "lib/generators/blue_light_special/templates/migrations/update_users.rb",
+     "lib/generators/blue_light_special/templates/rails.js",
+     "lib/generators/blue_light_special/templates/style.css",
+     "lib/generators/blue_light_special/templates/user.rb",
+     "lib/generators/blue_light_special/templates/xd_receiver.html",
+     "lib/generators/blue_light_special/templates/xd_receiver_ssl.html",
+     "lib/generators/blue_light_special_admin/USAGE",
+     "lib/generators/blue_light_special_admin/blue_light_special_admin_generator.rb",
+     "lib/generators/blue_light_special_admin/templates/README",
+     "lib/generators/blue_light_special_admin/templates/app/controllers/admin/admin_controller.rb",
+     "lib/generators/blue_light_special_admin/templates/app/controllers/admin/users_controller.rb",
+     "lib/generators/blue_light_special_admin/templates/app/views/admin/users/_form.html.erb",
+     "lib/generators/blue_light_special_admin/templates/app/views/admin/users/edit.html.erb",
+     "lib/generators/blue_light_special_admin/templates/app/views/admin/users/index.html.erb",
+     "lib/generators/blue_light_special_admin/templates/app/views/admin/users/new.html.erb",
+     "lib/generators/blue_light_special_admin/templates/app/views/admin/users/show.html.erb",
+     "lib/generators/blue_light_special_admin/templates/test/integration/admin/users_test.rb",
+     "lib/generators/blue_light_special_tests/USAGE",
+     "lib/generators/blue_light_special_tests/blue_light_special_tests_generator.rb",
+     "lib/generators/blue_light_special_tests/templates/README",
+     "lib/generators/blue_light_special_tests/templates/test/integration/edit_profile_test.rb",
+     "lib/generators/blue_light_special_tests/templates/test/integration/facebook_test.rb",
+     "lib/generators/blue_light_special_tests/templates/test/integration/impersonation_test.rb",
+     "lib/generators/blue_light_special_tests/templates/test/integration/password_reset_test.rb",
+     "lib/generators/blue_light_special_tests/templates/test/integration/sign_in_test.rb",
+     "lib/generators/blue_light_special_tests/templates/test/integration/sign_out_test.rb",
+     "lib/generators/blue_light_special_tests/templates/test/integration/sign_up_test.rb",
+     "lib/generators/delayed_job/delayed_job_generator.rb",
+     "lib/generators/delayed_job/templates/migration.rb",
+     "lib/generators/delayed_job/templates/script",
      "shoulda_macros/blue_light_special.rb"
   ]
   s.homepage = %q{http://github.com/envylabs/blue_light_special}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Rails authentication by email and password}
   s.test_files = [
     "test/controllers/passwords_controller_test.rb",
@@ -97,31 +98,28 @@ Gem::Specification.new do |s|
      "test/models/blue_light_special_mailer_test.rb",
      "test/models/impersonation_test.rb",
      "test/models/user_test.rb",
-     "test/rails_root/app/controllers/accounts_controller.rb",
      "test/rails_root/app/controllers/admin/admin_controller.rb",
      "test/rails_root/app/controllers/admin/users_controller.rb",
      "test/rails_root/app/controllers/application_controller.rb",
      "test/rails_root/app/helpers/application_helper.rb",
-     "test/rails_root/app/helpers/confirmations_helper.rb",
-     "test/rails_root/app/helpers/passwords_helper.rb",
      "test/rails_root/app/models/user.rb",
+     "test/rails_root/config/application.rb",
      "test/rails_root/config/boot.rb",
      "test/rails_root/config/environment.rb",
      "test/rails_root/config/environments/development.rb",
      "test/rails_root/config/environments/production.rb",
      "test/rails_root/config/environments/test.rb",
+     "test/rails_root/config/initializers/backtrace_silencers.rb",
      "test/rails_root/config/initializers/blue_light_special.rb",
      "test/rails_root/config/initializers/inflections.rb",
      "test/rails_root/config/initializers/mime_types.rb",
-     "test/rails_root/config/initializers/requires.rb",
-     "test/rails_root/config/initializers/time_formats.rb",
+     "test/rails_root/config/initializers/secret_token.rb",
+     "test/rails_root/config/initializers/session_store.rb",
      "test/rails_root/config/routes.rb",
-     "test/rails_root/db/migrate/20100318015023_blue_light_special_create_users.rb",
-     "test/rails_root/db/migrate/20100318015024_create_delayed_jobs.rb",
-     "test/rails_root/public/dispatch.rb",
-     "test/rails_root/script/create_project.rb",
+     "test/rails_root/db/migrate/20100426204055_blue_light_special_create_users.rb",
+     "test/rails_root/db/migrate/20100426204101_create_delayed_jobs.rb",
+     "test/rails_root/db/schema.rb",
      "test/rails_root/test/factories/user.rb",
-     "test/rails_root/test/functional/accounts_controller_test.rb",
      "test/rails_root/test/integration/admin/users_test.rb",
      "test/rails_root/test/integration/edit_profile_test.rb",
      "test/rails_root/test/integration/facebook_test.rb",
@@ -130,30 +128,8 @@ Gem::Specification.new do |s|
      "test/rails_root/test/integration/sign_in_test.rb",
      "test/rails_root/test/integration/sign_out_test.rb",
      "test/rails_root/test/integration/sign_up_test.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/generators/delayed_job/delayed_job_generator.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/generators/delayed_job/templates/migration.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/init.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/command.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/job.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/message_sending.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/performable_method.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/recipes.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/tasks.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed/worker.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/lib/delayed_job.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/recipes/delayed_job.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/database.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/delayed_method_spec.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/job_spec.rb",
-     "test/rails_root/vendor/gems/delayed_job-1.8.4/spec/story_spec.rb",
-     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/generators/formtastic_stylesheets/formtastic_stylesheets_generator.rb",
-     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/lib/formtastic.rb",
-     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/lib/justin_french/formtastic.rb",
-     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/rails/init.rb",
-     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/spec/formtastic_spec.rb",
-     "test/rails_root/vendor/gems/justinfrench-formtastic-0.2.4/spec/test_helper.rb",
-     "test/rails_root/vendor/gems/mini_fb-0.2.2/lib/mini_fb.rb",
-     "test/rails_root/vendor/gems/mini_fb-0.2.2/test/test_mini_fb.rb",
+     "test/rails_root/test/performance/browsing_test.rb",
+     "test/rails_root/test/test_helper.rb",
      "test/test_helper.rb"
   ]
 
@@ -162,21 +138,33 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<mini_fb>, ["= 0.2.2"])
-      s.add_runtime_dependency(%q<delayed_job>, ["= 1.8.4"])
-      s.add_runtime_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
+      s.add_runtime_dependency(%q<mini_fb>, [">= 0"])
+      s.add_runtime_dependency(%q<delayed_job>, [">= 0"])
+      s.add_runtime_dependency(%q<mad_mimi_mailer>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<factory_girl>, [">= 0"])
+      s.add_development_dependency(%q<webrat>, [">= 0"])
+      s.add_development_dependency(%q<fakeweb>, [">= 0"])
+      s.add_development_dependency(%q<mocha>, [">= 0"])
     else
-      s.add_dependency(%q<mini_fb>, ["= 0.2.2"])
-      s.add_dependency(%q<delayed_job>, ["= 1.8.4"])
-      s.add_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
+      s.add_dependency(%q<mini_fb>, [">= 0"])
+      s.add_dependency(%q<delayed_job>, [">= 0"])
+      s.add_dependency(%q<mad_mimi_mailer>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<factory_girl>, [">= 0"])
+      s.add_dependency(%q<webrat>, [">= 0"])
+      s.add_dependency(%q<fakeweb>, [">= 0"])
+      s.add_dependency(%q<mocha>, [">= 0"])
     end
   else
-    s.add_dependency(%q<mini_fb>, ["= 0.2.2"])
-    s.add_dependency(%q<delayed_job>, ["= 1.8.4"])
-    s.add_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
+    s.add_dependency(%q<mini_fb>, [">= 0"])
+    s.add_dependency(%q<delayed_job>, [">= 0"])
+    s.add_dependency(%q<mad_mimi_mailer>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<factory_girl>, [">= 0"])
+    s.add_dependency(%q<webrat>, [">= 0"])
+    s.add_dependency(%q<fakeweb>, [">= 0"])
+    s.add_dependency(%q<mocha>, [">= 0"])
   end
 end
 

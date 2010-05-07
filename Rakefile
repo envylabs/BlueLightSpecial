@@ -13,9 +13,9 @@ begin
     gem.authors     = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
     gem.files       = FileList["[A-Z]*", "{app,config,generators,lib,shoulda_macros,rails}/**/*"]
     
-    gem.add_dependency "mini_fb", '=0.2.5'
-    gem.add_dependency "delayed_job", '=2.0.3'
-    gem.add_dependency "mad_mimi_mailer", '=0.0.9'
+    gem.add_dependency "mini_fb"
+    gem.add_dependency "delayed_job"
+    gem.add_dependency "mad_mimi_mailer"
     
     gem.add_development_dependency "shoulda", ">= 0"
     gem.add_development_dependency "factory_girl", ">= 0"
