@@ -19,11 +19,11 @@ Next:
 2. Update your test_helper.rb with:
 
      require 'shoulda'
-
+     
      FakeWeb.allow_net_connect = false
-
+     
      Webrat.configure do |config|
-       config.mode             = :rails
+       config.mode             = :rack
        config.open_error_files = false
      end
      
@@ -31,18 +31,22 @@ Next:
        include Webrat::Matchers
        include Webrat::Methods
        
+       def last_response
+         response
+       end
+       
        def sign_in_as(email, password, url_to_visit = sign_in_url)
          visit url_to_visit
          fill_in "Email",      :with => email
          fill_in "Password",   :with => password
          click_button "sign in"
        end
-
+     
        def reset_session
          request.reset_session
          controller.instance_variable_set(:@_current_user, nil)
        end
-
+     
        def sign_up(options = {})
          visit new_user_url
          fill_in "email",            :with => options[:email]                  || 'bob@bob.bob'
@@ -52,7 +56,7 @@ Next:
          fill_in "confirm password", :with => options[:password_confirmation]  || options[:password] || 'password'
          click_button 'sign up'
        end
-
+     
        def sign_out
          visit session_url, :delete
        end
