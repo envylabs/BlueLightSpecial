@@ -19,6 +19,10 @@ Next:
 2. Update your test_helper.rb with:
 
      require 'shoulda'
+
+     require 'factory_girl'
+     Factory.definition_file_paths = [ File.join(Rails.root, 'test', 'factories') ]
+     Factory.find_definitions
      
      FakeWeb.allow_net_connect = false
      
