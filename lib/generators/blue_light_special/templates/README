@@ -14,11 +14,17 @@ Next:
 
      config.filter_parameters += [:password, :password_confirmation]
 
-3. If you haven't already, be sure you have delayed_jobs setup and configured:
+3. Add the following Rails 3 compatible versions of required gems to your Gemfile:
+
+     gem 'delayed_job', :git => 'git://github.com/collectiveidea/delayed_job.git'
+     gem 'mini_fb'
+     gem 'mad_mimi_mailer', :git => 'git://github.com/markkendall/mad_mimi_mailer', :branch => 'rails3'
+
+4. If you haven't already, be sure you have delayed_jobs setup and configured:
 
      rails generate delayed_job
 
-4. Migrate:
+5. Migrate:
 
      rake db:migrate
 
