@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{blue_light_special}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
-  s.date = %q{2010-03-19}
+  s.date = %q{2010-07-27}
   s.description = %q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
   s.email = %q{nate@envylabs.com}
   s.extra_rdoc_files = [
@@ -88,7 +88,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/envylabs/blue_light_special}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Rails authentication by email and password}
   s.test_files = [
     "test/controllers/passwords_controller_test.rb",
@@ -116,8 +116,8 @@ Gem::Specification.new do |s|
      "test/rails_root/config/initializers/requires.rb",
      "test/rails_root/config/initializers/time_formats.rb",
      "test/rails_root/config/routes.rb",
-     "test/rails_root/db/migrate/20100318015023_blue_light_special_create_users.rb",
-     "test/rails_root/db/migrate/20100318015024_create_delayed_jobs.rb",
+     "test/rails_root/db/migrate/20100727214301_blue_light_special_create_users.rb",
+     "test/rails_root/db/migrate/20100727214302_create_delayed_jobs.rb",
      "test/rails_root/public/dispatch.rb",
      "test/rails_root/script/create_project.rb",
      "test/rails_root/test/factories/user.rb",
@@ -161,7 +161,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<mini_fb>, ["= 0.2.2"])
       s.add_runtime_dependency(%q<delayed_job>, ["= 1.8.4"])
       s.add_runtime_dependency(%q<mad_mimi_mailer>, ["= 0.0.7"])
